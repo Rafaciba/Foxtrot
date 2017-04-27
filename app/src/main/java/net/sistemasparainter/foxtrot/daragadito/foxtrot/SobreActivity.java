@@ -11,8 +11,9 @@ public class SobreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sobre);
 
-        //ActionBar ab = getSupportActionBar();
-        //ab.setDisplayHomeAsUpEnabled(true);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
     }
 

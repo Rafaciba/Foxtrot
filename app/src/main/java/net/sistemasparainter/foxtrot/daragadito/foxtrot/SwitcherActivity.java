@@ -29,20 +29,20 @@ public class SwitcherActivity extends AppCompatActivity {
             }
         });
 
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
+        //buttonSignup.setOnClickListener(new View.OnClickListener() {
+            //@Override
+           // public void onClick(View v) {
+               // Intent i = new Intent(SwitcherActivity.this, SignupActivity.class);
+              //  startActivity(i);
+            //}
+      //  });
+
+        buttonAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SwitcherActivity.this, SignupActivity.class);
+                Intent i = new Intent(SwitcherActivity.this, SobreActivity.class);
                 startActivity(i);
             }
         });
-
-//        buttonAbout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(SwitcherActivity.this, SobreActivity.class);
-//                startActivity(i);
-//            }
-//        });
     }
 }

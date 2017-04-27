@@ -23,7 +23,5 @@
 
         <activity android:name=".SobreActivity" android:parentActivityName=".ProdutosActivity"/>
 
-        <activity android:name=".SwitcherActivity"/>
-
     </application>
 </manifest>

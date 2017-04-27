@@ -32,7 +32,7 @@ public class SwitcherActivity extends AppCompatActivity {
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SwitcherActivity.this, SignupActivity.class);
+                Intent i = new Intent(SwitcherActivity.this, CadastroActivity.class);
                 startActivity(i);
             }
         });

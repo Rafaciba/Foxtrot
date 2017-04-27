@@ -25,12 +25,12 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private CheckBox cbManterLogado;
     ShowDialog sd = new ShowDialog(LoginActivity.this);
-    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
         if(prefs.getString("usuario", null) != null){
 
             JSONObject json = null;
@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(cbManterLogado.isChecked()) {
                         //TODO sharedPreferences Login
+                        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
                         SharedPreferences.Editor sharedEditor = prefs.edit();
                         sharedEditor.putString("usuario",respostaCompleta);
                     }

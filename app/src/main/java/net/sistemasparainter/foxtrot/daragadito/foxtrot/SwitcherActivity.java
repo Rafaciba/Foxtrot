@@ -37,12 +37,12 @@ public class SwitcherActivity extends AppCompatActivity {
             }
         });
 
-//        buttonAbout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(SwitcherActivity.this, SobreActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        buttonAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SwitcherActivity.this, SobreActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

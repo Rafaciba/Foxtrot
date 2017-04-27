@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText etNome;
@@ -54,14 +60,30 @@ public class CadastroActivity extends AppCompatActivity {
                         etTelComercial.getText().toString().equals("") ||
                         etTelResidencial.getText().toString().equals("") ||
                         etDtNascimento.getText().toString().equals("")) {
+                    showDialog.showMessage("Por favor preencha todos os campos", "Erro");
+                    return;
+                }
+
+                if (!etSenha.getText().toString().equals(etConfSenha.getText().toString())){
                     showDialog.showMessage("As senhas devem ser iguais", "Erro");
                     return;
                 }
 
-                if (etSenha.getText().toString().equals(etConfSenha.getText().toString())){
-                    showDialog.showMessage("As senhas devem ser iguais", "Erro");
-                    return;
-                }
+//                try{
+//
+//                    HttpURLConnection urlConnection = (HttpURLConnection) new URL("").openConnection();
+//
+//                    InputStream in = urlConnection.getInputStream();
+//
+//                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+//
+//                    StringBuilder resultado = new StringBuilder();
+//                    String linha = bufferedReader.readLine();
+//
+//
+//                }catch(Exception e){
+//
+//                }
             }
         });
     }

@@ -1,0 +1,112 @@
+package net.sistemasparainter.foxtrot.daragadito.foxtrot;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class LoginActivity extends AppCompatActivity {
+
+    private EditText usuario;
+    private EditText senha;
+    private Button btnLogin;
+    private CheckBox cbManterLogado;
+    ShowDialog sd = new ShowDialog(LoginActivity.this);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+        if(prefs.getString("usuario", null) != null){
+
+            JSONObject json = null;
+            try {
+                json = new JSONObject(prefs.getString("usuario", null));
+                Usuario u = new Usuario(json.getInt("idCliente"),
+                        json.getString("nomeCompletoCliente"),
+                        json.getString("emailCliente"),
+                        json.getString("senhaCliente"),
+                        json.getString("CPFCliente"));
+
+                SingletonUsuario singletonUsuarioLogado = SingletonUsuario.getInstance();
+                singletonUsuarioLogado.setUsuarioLogado(u);
+
+                Intent i = new Intent(LoginActivity.this, ProdutosActivity.class);
+                startActivity(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                sd.showMessage("Erro ao recuperar seu login.\nPor favor entre com seus dados novamente.","Erro");
+            }
+        }
+
+        setContentView(R.layout.activity_login);
+
+        usuario = (EditText) findViewById(R.id.etUsuario);
+        senha = (EditText) findViewById(R.id.etSenha);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        cbManterLogado = (CheckBox) findViewById(R.id.cbManterLogado);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+
+                    /*HttpURLConnection urlConnection = (HttpURLConnection) new URL("").openConnection();
+
+                    InputStream in = urlConnection.getInputStream();
+
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+
+                    StringBuilder resultado = new StringBuilder();
+                    String linha = bufferedReader.readLine();
+
+                    while (linha != null) {
+                        resultado.append(linha);
+                        linha = bufferedReader.readLine();
+                    }
+
+                    String respostaCompleta = resultado.toString();*/
+
+                    String respostaCompleta = "{\"idCliente\":1,\"nomeCompletoCliente\":\"Thiago\",\"emailCliente\":\"thiago@bolodesal.com.br\"," +
+                                        "\"senhaCliente\":\"bolodesal\", \"CPFCliente\":\"98765432100\"}";
+
+                    JSONObject json = new JSONObject(respostaCompleta);
+
+                    Usuario u = new Usuario(json.getInt("idCliente"),
+                                            json.getString("nomeCompletoCliente"),
+                                            json.getString("emailCliente"),
+                                            json.getString("senhaCliente"),
+                                            json.getString("CPFCliente"));
+
+                    if(cbManterLogado.isChecked()) {
+                        //TODO sharedPreferences Login
+                        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                        SharedPreferences.Editor sharedEditor = prefs.edit();
+                        sharedEditor.putString("usuario",respostaCompleta);
+                    }
+
+                    SingletonUsuario singletonUsuarioLogado = SingletonUsuario.getInstance();
+                    singletonUsuarioLogado.setUsuarioLogado(u);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    sd.showMessage("Erro de login","Erro");
+                }
+            }
+        });
+    }
+}

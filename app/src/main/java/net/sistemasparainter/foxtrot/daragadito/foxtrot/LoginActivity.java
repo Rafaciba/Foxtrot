@@ -12,12 +12,6 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usuario;
@@ -36,14 +30,14 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = null;
             try {
                 json = new JSONObject(prefs.getString("usuario", null));
-                Usuario u = new Usuario(json.getInt("idCliente"),
+                Cliente u = new Cliente(json.getInt("idCliente"),
                         json.getString("nomeCompletoCliente"),
                         json.getString("emailCliente"),
                         json.getString("senhaCliente"),
                         json.getString("CPFCliente"));
 
-                SingletonUsuario singletonUsuarioLogado = SingletonUsuario.getInstance();
-                singletonUsuarioLogado.setUsuarioLogado(u);
+                SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                singletonClienteLogado.setClienteLogado(u);
 
                 Intent i = new Intent(LoginActivity.this, ProdutosActivity.class);
                 startActivity(i);
@@ -86,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     JSONObject json = new JSONObject(respostaCompleta);
 
-                    Usuario u = new Usuario(json.getInt("idCliente"),
+                    Cliente u = new Cliente(json.getInt("idCliente"),
                                             json.getString("nomeCompletoCliente"),
                                             json.getString("emailCliente"),
                                             json.getString("senhaCliente"),
@@ -99,8 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                         sharedEditor.putString("usuario",respostaCompleta);
                     }
 
-                    SingletonUsuario singletonUsuarioLogado = SingletonUsuario.getInstance();
-                    singletonUsuarioLogado.setUsuarioLogado(u);
+                    SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                    singletonClienteLogado.setClienteLogado(u);
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -4,7 +4,7 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
  * Created by rafael.fccibim on 26/04/2017.
  */
 
-public class Usuario {
+public class Cliente {
 
     private int idCliente;
     private String nomeCompletoCliente;
@@ -12,7 +12,7 @@ public class Usuario {
     private String senhaCliente;
     private String CPFCliente;
 
-    public Usuario(int idCliente, String nomeCompletoCliente, String emailCliente, String senhaCliente, String CPFCliente) {
+    public Cliente(int idCliente, String nomeCompletoCliente, String emailCliente, String senhaCliente, String CPFCliente) {
         this.idCliente = idCliente;
         this.nomeCompletoCliente = nomeCompletoCliente;
         this.emailCliente = emailCliente;

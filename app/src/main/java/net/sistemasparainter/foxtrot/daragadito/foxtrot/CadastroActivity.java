@@ -8,11 +8,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -51,7 +57,6 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (etNome.getText().toString().equals("") ||
-                        etNome.getText().toString().equals("") ||
                         etEmail.getText().toString().equals("") ||
                         etSenha.getText().toString().equals("") ||
                         etConfSenha.getText().toString().equals("") ||
@@ -69,21 +74,32 @@ public class CadastroActivity extends AppCompatActivity {
                     return;
                 }
 
-//                try{
-//
-//                    HttpURLConnection urlConnection = (HttpURLConnection) new URL("").openConnection();
-//
-//                    InputStream in = urlConnection.getInputStream();
-//
-//                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-//
-//                    StringBuilder resultado = new StringBuilder();
-//                    String linha = bufferedReader.readLine();
-//
-//
-//                }catch(Exception e){
-//
-//                }
+                String getNewsletter = cbNewsletter.isChecked() ? "1" : "0";
+
+                try{
+
+                    JSONObject jsonSignup = new JSONObject();
+                    jsonSignup.put("nomeCompletoCliente", etNome.getText().toString());
+                    jsonSignup.put("emailCliente", etEmail.getText().toString());
+                    jsonSignup.put("senhaCliente", etSenha.getText().toString());
+                    jsonSignup.put("CPFCliente", etCpf.getText().toString());
+                    jsonSignup.put("celularCliente", etCelular.getText().toString());
+                    jsonSignup.put("telComercialCliente", etTelComercial.getText().toString());
+                    jsonSignup.put("telResidencialCliente", etTelResidencial.getText().toString());
+                    jsonSignup.put("dtNascCliente", etDtNascimento.getText().toString());
+                    jsonSignup.put("recebeNewsLetter", getNewsletter);
+
+
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.github.com/")
+                            .build();
+
+                    Retrofit service = retrofit.create(Retrofit.class);
+
+                    //Call<List<Cliente>> cliente = service.createCliente(jsonSignup);
+                }catch(Exception e){
+
+                }
             }
         });
     }

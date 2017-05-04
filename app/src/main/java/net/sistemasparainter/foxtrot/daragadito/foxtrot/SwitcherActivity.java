@@ -11,6 +11,7 @@ public class SwitcherActivity extends AppCompatActivity {
     private Button buttonLogin;
     private Button buttonSignup;
     private Button buttonAbout;
+    private Button buttonTermos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class SwitcherActivity extends AppCompatActivity {
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
         buttonAbout = (Button) findViewById(R.id.buttonAbout);
+        buttonTermos = (Button) findViewById(R.id.buttonTermos);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +43,14 @@ public class SwitcherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SwitcherActivity.this, SobreActivity.class);
+                startActivity(i);
+            }
+        });
+
+        buttonTermos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SwitcherActivity.this, TermosActivity.class);
                 startActivity(i);
             }
         });

@@ -31,6 +31,7 @@ public class Cliente {
         this.recebeNewsLetter = recebeNewsLetter;
     }
 
+
     public int getIdCliente() {
         return idCliente;
     }

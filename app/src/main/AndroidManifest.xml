@@ -9,7 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity">
+
+        </activity>
         <activity android:name=".CadastroActivity"></activity>
         <activity android:name=".SwitcherActivity">
             <intent-filter>
@@ -18,7 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".QRCodeActivity"
+            android:parentActivityName=".SwitcherActivity" />
         <activity android:name=".SobreActivity" android:parentActivityName=".ProdutosActivity"/>
         <activity android:name=".TermosActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

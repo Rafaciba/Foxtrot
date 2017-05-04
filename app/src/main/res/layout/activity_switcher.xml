@@ -33,7 +33,6 @@
         android:layout_below="@+id/buttonSignup"
         android:layout_alignParentStart="true"
         android:id="@+id/buttonAbout" />
-
     <Button
         android:text="Termos"
         android:layout_width="wrap_content"
@@ -42,4 +41,12 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="14dp"
         android:id="@+id/buttonTermos" />
+    <Button
+        android:text="QRCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/buttonQRCode"
+        android:layout_below="@+id/buttonAbout"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

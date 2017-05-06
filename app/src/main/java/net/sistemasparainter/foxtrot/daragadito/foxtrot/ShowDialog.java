@@ -1,6 +1,7 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -24,6 +25,20 @@ public class ShowDialog {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showMessageAndRedirect(String val, String title, final Intent i) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(atividade);
+        builder.setMessage(val);
+        builder.setTitle(title);
+        builder.setCancelable(false);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                atividade.startActivity(i);
             }
         });
         AlertDialog dialog = builder.create();

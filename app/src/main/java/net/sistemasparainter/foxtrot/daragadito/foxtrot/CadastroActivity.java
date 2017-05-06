@@ -1,6 +1,7 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -74,29 +75,45 @@ public class CadastroActivity extends AppCompatActivity {
                     return;
                 }
 
-                String getNewsletter = cbNewsletter.isChecked() ? "1" : "0";
+                Integer getNewsletter = cbNewsletter.isChecked() ? 1 : 0;
 
                 try{
 
-                    JSONObject jsonSignup = new JSONObject();
-                    jsonSignup.put("nomeCompletoCliente", etNome.getText().toString());
-                    jsonSignup.put("emailCliente", etEmail.getText().toString());
-                    jsonSignup.put("senhaCliente", etSenha.getText().toString());
-                    jsonSignup.put("CPFCliente", etCpf.getText().toString());
-                    jsonSignup.put("celularCliente", etCelular.getText().toString());
-                    jsonSignup.put("telComercialCliente", etTelComercial.getText().toString());
-                    jsonSignup.put("telResidencialCliente", etTelResidencial.getText().toString());
-                    jsonSignup.put("dtNascCliente", etDtNascimento.getText().toString());
-                    jsonSignup.put("recebeNewsLetter", getNewsletter);
-
+                    Cliente novoCliente =  new Cliente(
+                            etNome.getText().toString(),
+                            etEmail.getText().toString(),
+                            etSenha.getText().toString(),
+                            etCpf.getText().toString(),
+                            etCelular.getText().toString(),
+                            etTelComercial.getText().toString(),
+                            etTelResidencial.getText().toString(),
+                            etDtNascimento.getText().toString(),
+                            getNewsletter
+                    );
 
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("https://api.github.com/")
+                            .baseUrl("http://kymera.solutions/foxtrot/")
                             .build();
 
-                    Retrofit service = retrofit.create(Retrofit.class);
+                    Services service = retrofit.create(Services.class);
 
-                    //Call<List<Cliente>> cliente = service.createCliente(jsonSignup);
+//                    Call<Cliente> respostaCliente = service.createCliente(novoCliente);
+
+//                    showDialog.showMessage(respostaCliente.toString(), "Teste");
+
+                    String respostaCliente = "Deu certo";
+
+                    if (respostaCliente != null){
+
+                        Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+                        i.putExtra("email", etEmail.getText().toString());
+                        i.putExtra("senha", etSenha.getText().toString());
+                        showDialog.showMessageAndRedirect("Cliente cadastrado com sucesso!","Sucesso", i);
+
+                    }else{
+                        showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
+                    }
+
                 }catch(Exception e){
 
                 }

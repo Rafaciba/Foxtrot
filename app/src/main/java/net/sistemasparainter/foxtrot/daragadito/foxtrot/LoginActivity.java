@@ -34,7 +34,12 @@ public class LoginActivity extends AppCompatActivity {
                         json.getString("nomeCompletoCliente"),
                         json.getString("emailCliente"),
                         json.getString("senhaCliente"),
-                        json.getString("CPFCliente"));
+                        json.getString("CPFCliente"),
+                        json.getString("celularCliente"),
+                        json.getString("telComercialCliente"),
+                        json.getString("telResidencialCliente"),
+                        json.getString("dtNascCliente"),
+                        json.getInt("recebeNewsLetter"));
 
                 SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
                 singletonClienteLogado.setClienteLogado(u);
@@ -81,10 +86,15 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(respostaCompleta);
 
                     Cliente u = new Cliente(json.getInt("idCliente"),
-                                            json.getString("nomeCompletoCliente"),
-                                            json.getString("emailCliente"),
-                                            json.getString("senhaCliente"),
-                                            json.getString("CPFCliente"));
+                            json.getString("nomeCompletoCliente"),
+                            json.getString("emailCliente"),
+                            json.getString("senhaCliente"),
+                            json.getString("CPFCliente"),
+                            json.getString("celularCliente"),
+                            json.getString("telComercialCliente"),
+                            json.getString("telResidencialCliente"),
+                            json.getString("dtNascCliente"),
+                            json.getInt("recebeNewsLetter"));
 
                     if(cbManterLogado.isChecked()) {
                         //TODO sharedPreferences Login

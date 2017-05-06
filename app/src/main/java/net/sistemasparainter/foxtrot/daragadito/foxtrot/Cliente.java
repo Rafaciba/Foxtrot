@@ -32,6 +32,20 @@ public class Cliente {
     }
 
 
+    public Cliente(String nomeCompletoCliente, String emailCliente, String senhaCliente, String CPFCliente, String celularCliente,
+                   String telComercialCliente, String telResindencialCliente, String dtNascCliente, int recebeNewsLetter) {
+        this.nomeCompletoCliente = nomeCompletoCliente;
+        this.emailCliente = emailCliente;
+        this.senhaCliente = senhaCliente;
+        this.CPFCliente = CPFCliente;
+        this.celularCliente = celularCliente;
+        this.telComercialCliente = telComercialCliente;
+        this.telResindencialCliente = telResindencialCliente;
+        this.dtNascCliente = dtNascCliente;
+        this.recebeNewsLetter = recebeNewsLetter;
+    }
+
+
     public int getIdCliente() {
         return idCliente;
     }

@@ -11,42 +11,49 @@
     tools:context="net.sistemasparainter.foxtrot.daragadito.foxtrot.SwitcherActivity">
 
     <Button
-        android:text="Login"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/buttonLogin" />
+        android:text="Login" />
 
     <Button
-        android:text="Cadastro"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonSignup"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/buttonLogin"
-        android:layout_alignParentStart="true"
-        android:id="@+id/buttonSignup" />
+        android:text="Cadastro" />
 
     <Button
-        android:text="Sobre"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonAbout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonSignup"
         android:layout_alignParentStart="true"
-        android:id="@+id/buttonAbout" />
+        android:layout_below="@+id/buttonSignup"
+        android:text="Sobre" />
     <Button
         android:text="Termos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonAbout"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp"
         android:id="@+id/buttonTermos" />
+
     <Button
-        android:text="QRCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:id="@+id/buttonQRCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/buttonAbout"
+        android:text="QRCode" />
+
+    <Button
+        android:id="@+id/buttonCadastroEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastro Endereço"
+        android:layout_below="@+id/buttonTermos"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

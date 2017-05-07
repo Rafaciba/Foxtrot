@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="net.sistemasparainter.foxtrot.daragadito.foxtrot.CadastroActivity">
+
+    <ScrollView
+        android:id="@+id/svCadastroEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etCEP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etEmail"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="CEP"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/etLogradouroEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Endereço"
+                android:inputType="text"
+                android:layout_below="@+id/etCEP"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:id="@+id/etNumeroEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Número"
+                android:inputType="number"
+                android:layout_below="@+id/etLogradouroEndereco"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:id="@+id/etComplementoEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etNumeroEndereco"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Complemento"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etNome"
+                android:layout_marginTop="11dp"
+                android:ems="10"
+                android:hint="Nome do endereço"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etCidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etComplementoEndereco"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Cidade"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etCidade"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="Estado"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/etPais"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etEstado"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="País"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/etPais"
+                android:layout_marginTop="23dp"
+                android:text="Finalizar" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

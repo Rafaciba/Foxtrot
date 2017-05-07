@@ -13,7 +13,6 @@ import retrofit2.http.Path;
  */
 
 public interface Services {
-    @POST("cliente/add")
-    Call<Cliente> createCliente(JSONObject json);
-
+    @POST("cliente/add/index.php")
+    Call<Cliente> createCliente(Cliente cliente);
 }

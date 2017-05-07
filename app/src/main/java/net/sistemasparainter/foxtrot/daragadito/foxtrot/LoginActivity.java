@@ -81,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                     String respostaCompleta = resultado.toString();*/
 
                     String respostaCompleta = "{\"idCliente\":1,\"nomeCompletoCliente\":\"Thiago\",\"emailCliente\":\"thiago@bolodesal.com.br\"," +
-                                        "\"senhaCliente\":\"bolodesal\", \"CPFCliente\":\"98765432100\"}";
+                                        "\"senhaCliente\":\"bolodesal\", \"CPFCliente\":\"98765432100\",\"celularCliente\":\"11987654321\","+
+                                        "\"telComercialCliente\":\"55654175\",\"dtNascCliente\":\"1992-07-30\",\"recebeNewsLetter\":0}";
 
                     JSONObject json = new JSONObject(respostaCompleta);
 
@@ -90,9 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                             json.getString("emailCliente"),
                             json.getString("senhaCliente"),
                             json.getString("CPFCliente"),
-                            json.getString("celularCliente"),
-                            json.getString("telComercialCliente"),
-                            json.getString("telResidencialCliente"),
+                            (json.getString("celularCliente") != null)?json.getString("celularCliente"):"",
+                            (json.getString("telComercialCliente") != null)?json.getString("telComercialCliente"):"",
+                            (json.getString("telResidencialCliente") != null)?json.getString("telResidencialCliente"):"",
                             json.getString("dtNascCliente"),
                             json.getInt("recebeNewsLetter"));
 

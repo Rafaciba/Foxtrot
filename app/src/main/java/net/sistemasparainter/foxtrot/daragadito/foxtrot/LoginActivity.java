@@ -59,6 +59,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         cbManterLogado = (CheckBox) findViewById(R.id.cbManterLogado);
 
+        Intent userInfos = getIntent();
+
+        if (userInfos != null){
+            usuario.setText(userInfos.getStringExtra("email"));
+            senha.setText(userInfos.getStringExtra("senha"));
+        }
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

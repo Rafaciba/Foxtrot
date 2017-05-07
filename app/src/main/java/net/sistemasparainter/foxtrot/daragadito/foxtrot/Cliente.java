@@ -6,6 +6,7 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 public class Cliente {
 
+    Endereco enderecoCliente;
     private int idCliente;
     private String nomeCompletoCliente;
     private String emailCliente;
@@ -84,5 +85,13 @@ public class Cliente {
 
     public int getRecebeNewsLetter() {
         return recebeNewsLetter;
+    }
+
+    public Endereco getEnderecoCliente(){
+        return enderecoCliente;
+    }
+
+    public void setEndereco(Endereco enderecoCliente){
+        this.enderecoCliente = enderecoCliente;
     }
 }

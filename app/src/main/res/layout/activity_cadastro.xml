@@ -27,7 +27,7 @@
                 android:layout_below="@+id/etEmail"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="12dp"
-                android:id="@+id/etSenha"
+                android:id="@+id/etCEP"
                 android:hint="Senha"
                 android:inputType="textPassword" />
 
@@ -35,10 +35,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:layout_below="@+id/etSenha"
+                android:layout_below="@+id/etCEP"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="14dp"
-                android:id="@+id/etConfSenha"
+                android:id="@+id/etLogradouroEndereco"
                 android:hint="Confirme sua senha"
                 android:inputType="textPassword" />
 
@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/etCpf"
-                android:layout_below="@+id/etConfSenha"
+                android:id="@+id/etNumeroEndereco"
+                android:layout_below="@+id/etLogradouroEndereco"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="11dp"
                 android:hint="CPF"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/etTelComercial"
-                android:layout_below="@+id/etCelular"
+                android:layout_below="@+id/etComplementoEndereco"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="11dp"
                 android:hint="Telefne comercial"
@@ -78,10 +78,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/etCelular"
+                android:id="@+id/etComplementoEndereco"
                 android:layout_marginTop="13dp"
                 android:hint="Celular"
-                android:layout_below="@+id/etCpf"
+                android:layout_below="@+id/etNumeroEndereco"
                 android:layout_alignParentStart="true"
                 android:inputType="phone" />
 

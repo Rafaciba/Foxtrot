@@ -96,8 +96,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                         Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
 
                         int idEndereco = 98;
-//                        novoEnderecoCliente.setIdEndereco(idEndereco);
-//                        cliente.setEndereco(novoEnderecoCliente);
+//                        novoEnderecoCliente.setCliente(cliente);
                         showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
 
                     }else{

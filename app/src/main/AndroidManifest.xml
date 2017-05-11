@@ -37,13 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".QRCodeActivity"
-            android:parentActivityName=".SwitcherActivity" />
-        <activity
-            android:name=".SobreActivity"
-            android:parentActivityName=".ProdutosActivity" />
-        <activity android:name=".TermosActivity" />
+
         <activity android:name=".CadastroEnderecoActivity"></activity>
     </application>
 

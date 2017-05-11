@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
@@ -84,24 +87,26 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
                     Services service = retrofit.create(Services.class);
 
-//                    Call<Cliente> respostaServico = service.createCliente(novoEnderecoCliente);
+                    Call<Void> respostaServico = service.setEndereco(novoEnderecoCliente);
 
-//                    showDialog.showMessage(respostaServico.toString(), "Teste");
-
-                    String respostaServico = "Deu certo";
 
                     // TRATAMENTO DA RESPOTA DO SERVIÇO
-                    if (!respostaServico.equals("")){
+                    respostaServico.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
 
-                        Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
-
-                        int idEndereco = 98;
+                            int idEndereco = 98;
 //                        novoEnderecoCliente.setCliente(cliente);
-                        showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
+                            showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
+                        }
 
-                    }else{
-                        showDialog.showMessage("Erro ao cadastrar endereço...","Erro");
-                    }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            showDialog.showMessage("Erro ao cadastrar endereço...","Erro");
+                        }
+                    });
+
 
                 }catch(Exception e){
 

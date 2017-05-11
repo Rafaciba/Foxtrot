@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -86,22 +89,22 @@ public class CadastroActivity extends AppCompatActivity {
 
                     Services service = retrofit.create(Services.class);
 
-//                    Call<Cliente> respostaCliente = service.createCliente(novoCliente);
+                    Call<Void> respostaCliente = service.setCliente(novoCliente);
+                    respostaCliente.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+                            i.putExtra("email", etEmail.getText().toString());
+                            i.putExtra("senha", etSenha.getText().toString());
+                            showDialog.showMessageAndRedirect("Cliente cadastrado com sucesso!","Sucesso", i);
+                        }
 
-//                    showDialog.showMessage(respostaCliente.toString(), "Teste");
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
+                        }
+                    });
 
-                    String respostaCliente = "Deu certo";
-
-                    if (respostaCliente != null){
-
-                        Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
-                        i.putExtra("email", etEmail.getText().toString());
-                        i.putExtra("senha", etSenha.getText().toString());
-                        showDialog.showMessageAndRedirect("Cliente cadastrado com sucesso!","Sucesso", i);
-
-                    }else{
-                        showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
-                    }
 
                 }catch(Exception e){
 

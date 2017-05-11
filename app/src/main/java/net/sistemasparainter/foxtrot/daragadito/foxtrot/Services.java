@@ -13,6 +13,15 @@ import retrofit2.http.Path;
  */
 
 public interface Services {
-    @POST("cliente/add/index.php")
-    Call<Cliente> createCliente(Cliente cliente);
+    // CLIENTE
+        @POST("cliente")
+        Call<Void> setCliente(Cliente cliente);
+        @GET("cliente")
+        Call<Cliente> getCliente(Cliente cliente);
+
+    // ENDEREÇO
+        @POST("endereco")
+        Call<Void> setEndereco(Endereco endereco);
+        @GET("endereco")
+        Call<Endereco> getEndereco(Endereco endereco);
 }

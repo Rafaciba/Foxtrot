@@ -11,6 +11,7 @@ import java.text.Normalizer;
 
 public class TermosActivity extends AppCompatActivity {
 
+
     private Button buttonConcordo;
     private Button buttonNaoConcordo;
     private SharedPreferences preference;
@@ -22,7 +23,7 @@ public class TermosActivity extends AppCompatActivity {
 
         buttonConcordo = (Button) findViewById(R.id.buttonConcordo);
         buttonNaoConcordo = (Button) findViewById(R.id.buttonNaoConcordo);
-        preference = getSharedPreferences("temp", MODE_PRIVATE);
+        preference = getSharedPreferences("MinhaConfig", MODE_PRIVATE);
 
         Boolean aceito = preference.getBoolean("aceito", false);
         if(aceito){
@@ -31,6 +32,19 @@ public class TermosActivity extends AppCompatActivity {
         }
 
         buttonConcordo = (Button) findViewById(R.id.buttonConcordo);
+
+        buttonNaoConcordo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowDialog sd = new ShowDialog(TermosActivity.this);
+                    sd.showMessage("O aceite é obrigatório para utilização do nosso App", "Atenção");
+
+
+
+
+            }
+        });
 
         buttonConcordo.setOnClickListener(new View.OnClickListener() {
             @Override

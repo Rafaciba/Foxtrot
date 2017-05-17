@@ -94,6 +94,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                     respostaServico.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+
                             Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
 
                             int idEndereco = 98;
@@ -103,6 +104,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+
                             showDialog.showMessage("Erro ao cadastrar endereço...","Erro");
                         }
                     });

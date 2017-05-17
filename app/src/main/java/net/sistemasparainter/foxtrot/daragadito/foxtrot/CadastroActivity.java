@@ -90,9 +90,11 @@ public class CadastroActivity extends AppCompatActivity {
                     Services service = retrofit.create(Services.class);
 
                     Call<Void> respostaCliente = service.setCliente(novoCliente);
+
                     respostaCliente.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+
                             Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
                             i.putExtra("email", etEmail.getText().toString());
                             i.putExtra("senha", etSenha.getText().toString());
@@ -101,6 +103,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+
                             showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
                         }
                     });

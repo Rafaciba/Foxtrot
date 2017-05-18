@@ -36,11 +36,12 @@
                 android:text="Preço"
                 android:ems="10"
                 android:id="@+id/idPrecoProduto"
-                android:textAlignment="textEnd"
-                android:textSize="18sp"
                 android:layout_alignBottom="@+id/imageView"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/idNomeProduto" />
+                android:layout_toEndOf="@+id/idNomeProduto"
+                android:textAlignment="textEnd"
+                android:textColor="@android:color/holo_green_dark"
+                android:textStyle="normal|bold" />
 
             <EditText
                 android:layout_width="wrap_content"

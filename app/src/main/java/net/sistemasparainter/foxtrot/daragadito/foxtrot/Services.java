@@ -15,9 +15,10 @@ import retrofit2.http.Path;
 public interface Services {
     // CLIENTE
         @POST("cliente")
-        Call<Void> setCliente(Cliente cliente);
-        @GET("cliente")
-        Call<Cliente> getCliente(Cliente cliente);
+        Call<Void> setCliente(@Body Cliente cliente);
+
+        @GET("cliente/{idCliente}")
+        Call<Cliente> getCliente(@Path("idCliente") String idCliente);
 
     // ENDEREÇO
         @POST("endereco")

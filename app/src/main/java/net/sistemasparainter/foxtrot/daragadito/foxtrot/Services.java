@@ -45,6 +45,6 @@ public interface Services {
 
     // LOGIN
         @POST("login")
-        Call<Cliente> doLogin(@Body Cliente cliente);
+        Call<Cliente> doLogin(@Body String email, String senha);
 
 }

@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
                 singletonClienteLogado.setClienteLogado(u);
 
-                Intent i = new Intent(LoginActivity.this, ProdutosActivity.class);
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
             } catch (JSONException e) {
                 e.printStackTrace();

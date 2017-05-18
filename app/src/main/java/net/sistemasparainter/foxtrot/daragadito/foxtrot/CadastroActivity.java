@@ -12,6 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -84,7 +85,8 @@ public class CadastroActivity extends AppCompatActivity {
                     );
 
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://kymera.solutions/foxtrot/")
+                            .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
+                            .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
                     Services service = retrofit.create(Services.class);
@@ -110,7 +112,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
                 }catch(Exception e){
-
+                    e.printStackTrace();
                 }
             }
         });

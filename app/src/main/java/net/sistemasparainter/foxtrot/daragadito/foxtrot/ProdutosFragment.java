@@ -13,6 +13,7 @@ import android.view.ViewGroup;
  */
 public class ProdutosFragment extends Fragment {
 
+    private ViewGroup linearContainer;
 
     public ProdutosFragment() {
         // Required empty public constructor

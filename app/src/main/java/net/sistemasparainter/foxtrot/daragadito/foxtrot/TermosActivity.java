@@ -35,6 +35,7 @@ public class TermosActivity extends AppCompatActivity {
 
         buttonNaoConcordo.setOnClickListener(new View.OnClickListener() {
             @Override
+            
             public void onClick(View v) {
 
                 ShowDialog sd = new ShowDialog(TermosActivity.this);

@@ -32,6 +32,9 @@ public class ProdutosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View fragmentView = inflater.inflate(R.layout.fragment_produtos, container, false);
+
+        linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearContainer);
         ArrayList<String> urls = new ArrayList<>();
         urls.add("https://meuorixa.files.wordpress.com/2012/06/quartinhas_blog.jpg");
         urls.add("https://riodegraca.files.wordpress.com/2016/07/casa_suica.jpg");
@@ -39,17 +42,18 @@ public class ProdutosFragment extends Fragment {
 
         for (int i = 0; i < 3; i++) {
 
-            addCardView(urls.get(i));
+            addCardView(urls.get(i), savedInstanceState);
         }
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_produtos, container, false);
+        return fragmentView;
     }
-    private void addCardView(String url) {
-        CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
+    private void addCardView(String url, Bundle bundle) {
+
+        CardView cardView = (CardView) getLayoutInflater(bundle).inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
         ImageView verImagem = (ImageView) cardView.findViewById(R.id.imageView);
         ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
         imageLoader.displayImage(url, verImagem);
 
         linearContainer.addView(cardView);

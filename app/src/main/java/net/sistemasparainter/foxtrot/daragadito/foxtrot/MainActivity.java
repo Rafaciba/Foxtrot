@@ -23,12 +23,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!prefs.getBoolean("aceito", false)) {
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean aceito = prefs.getBoolean("aceito", false);
+        if(!aceito){
             Intent intent = new Intent(MainActivity.this, TermosActivity.class);
             startActivity(intent);
             return;
-        }
+        }*/
 
 
         setContentView(R.layout.activity_main);
@@ -47,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_produtos) {
-//                    ProdutosFragment fragment = new ProdutosFragment();
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-//                    return true;
+                    ProdutosFragment fragment = new ProdutosFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+                    return true;
                 } else if (id == R.id.nav_gallery) {
 
                 } else if (id == R.id.nav_slideshow) {

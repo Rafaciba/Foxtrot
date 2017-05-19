@@ -56,4 +56,13 @@
         android:text="Cadastro Endereço"
         android:layout_below="@+id/buttonTermos"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Produtos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonCadastroEndereco"
+        android:layout_alignParentStart="true"
+        android:id="@+id/buttonProdutos"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

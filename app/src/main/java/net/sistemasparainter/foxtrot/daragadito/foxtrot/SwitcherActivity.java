@@ -14,6 +14,7 @@ public class SwitcherActivity extends AppCompatActivity {
     private Button buttonTermos;
     private Button buttonQRCode;
     private Button buttonCadastroEndereco;
+    private Button buttonProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,8 @@ public class SwitcherActivity extends AppCompatActivity {
         buttonAbout = (Button) findViewById(R.id.buttonAbout);
         buttonQRCode = (Button) findViewById(R.id.buttonQRCode);
         buttonTermos = (Button) findViewById(R.id.buttonTermos);
-        buttonCadastroEndereco= (Button) findViewById(R.id.buttonCadastroEndereco);
+        buttonCadastroEndereco = (Button) findViewById(R.id.buttonCadastroEndereco);
+        buttonProdutos = (Button) findViewById(R.id.buttonProdutos);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +73,14 @@ public class SwitcherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SwitcherActivity.this, CadastroEnderecoActivity.class);
+                startActivity(i);
+            }
+        });
+
+        buttonProdutos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SwitcherActivity.this, MainActivity.class);
                 startActivity(i);
             }
         });

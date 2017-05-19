@@ -4,6 +4,8 @@ import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -45,6 +47,10 @@ public interface Services {
 
     // LOGIN
         @POST("login")
-        Call<Cliente> doLogin(@Body String email, String senha);
+        Call<Cliente> doLogin(@Body JSONObject data);
+
+        /*@FormUrlEncoded
+            @POST("login")
+            Call<Cliente> doLogin(@Field("email") String email, @Field("senha") String senha);*/
 
 }

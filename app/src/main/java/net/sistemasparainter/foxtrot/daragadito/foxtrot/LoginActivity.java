@@ -12,6 +12,14 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usuario;
@@ -19,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private CheckBox cbManterLogado;
     ShowDialog sd = new ShowDialog(LoginActivity.this);
+    private Cliente usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,49 +79,56 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                    /*HttpURLConnection urlConnection = (HttpURLConnection) new URL("").openConnection();
+                    Services service = retrofit.create(Services.class);
 
-                    InputStream in = urlConnection.getInputStream();
+                    /*Call<Cliente> respostaCliente = service.doLogin(usuario.getText().toString(), senha.getText().toString());
 
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    respostaCliente.enqueue(new Callback<Cliente>() {
+                        @Override
+                        public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                            System.out.println("ASD: " + call.request().toString());
 
-                    StringBuilder resultado = new StringBuilder();
-                    String linha = bufferedReader.readLine();
+                            usuarioLogado = response.body();
 
-                    while (linha != null) {
-                        resultado.append(linha);
-                        linha = bufferedReader.readLine();
-                    }
+                            JSONObject clienteJson = new JSONObject();
+                            try {
+                                clienteJson.put("idCliente", usuarioLogado.getIdCliente());
+                                clienteJson.put("nomeCompletoCliente", usuarioLogado.getNomeCompletoCliente());
+                                clienteJson.put("emailCliente", usuarioLogado.getEmailCliente());
+                                clienteJson.put("senhaCliente", usuarioLogado.getSenhaCliente());
+                                clienteJson.put("CPFCliente", usuarioLogado.getCPFCliente());
+                                clienteJson.put("celularCliente", usuarioLogado.getCelularCliente());
+                                clienteJson.put("telComercialCliente", usuarioLogado.getTelComercialCliente());
+                                clienteJson.put("telResidencialCliente", usuarioLogado.getTelResindencialCliente());
+                                clienteJson.put("dtNascCliente", usuarioLogado.getDtNascCliente());
+                                clienteJson.put("recebeNewsLetter", usuarioLogado.getRecebeNewsLetter());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                    String respostaCompleta = resultado.toString();*/
+                            if(cbManterLogado.isChecked()) {
+                                //TODO sharedPreferences Login
+                                SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                                SharedPreferences.Editor sharedEditor = prefs.edit();
+                                sharedEditor.putString("usuario", clienteJson.toString());
+                            }
 
-                    String respostaCompleta = "{\"idCliente\":1,\"nomeCompletoCliente\":\"Thiago\",\"emailCliente\":\"thiago@bolodesal.com.br\"," +
-                                        "\"senhaCliente\":\"bolodesal\", \"CPFCliente\":\"98765432100\",\"celularCliente\":\"11987654321\","+
-                                        "\"telComercialCliente\":\"55654175\",\"dtNascCliente\":\"1992-07-30\",\"recebeNewsLetter\":0}";
+                            SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                            singletonClienteLogado.setClienteLogado(usuarioLogado);
+                        }
 
-                    JSONObject json = new JSONObject(respostaCompleta);
+                        @Override
+                        public void onFailure(Call<Cliente> call, Throwable t) {
+                            System.out.println("ASD: " + call.request().toString());
 
-                    Cliente u = new Cliente(json.getInt("idCliente"),
-                            json.getString("nomeCompletoCliente"),
-                            json.getString("emailCliente"),
-                            json.getString("senhaCliente"),
-                            json.getString("CPFCliente"),
-                            (json.getString("celularCliente") != null)?json.getString("celularCliente"):"",
-                            (json.getString("telComercialCliente") != null)?json.getString("telComercialCliente"):"",
-                            (json.getString("telResidencialCliente") != null)?json.getString("telResidencialCliente"):"",
-                            json.getString("dtNascCliente"),
-                            json.getInt("recebeNewsLetter"));
-
-                    if(cbManterLogado.isChecked()) {
-                        //TODO sharedPreferences Login
-                        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-                        SharedPreferences.Editor sharedEditor = prefs.edit();
-                        sharedEditor.putString("usuario",respostaCompleta);
-                    }
-
-                    SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
-                    singletonClienteLogado.setClienteLogado(u);
+                            sd.showMessage("Usuário ou senha inválidos","Erro");
+                        }
+                    });*/
 
                 } catch (Exception e) {
                     e.printStackTrace();

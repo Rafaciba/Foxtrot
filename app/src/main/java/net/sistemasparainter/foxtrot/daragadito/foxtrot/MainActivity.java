@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!prefs.getBoolean("aceito", false)) {
+        if(prefs.getBoolean("aceito", false)) {
             Intent intent = new Intent(MainActivity.this, TermosActivity.class);
             startActivity(intent);
             return;

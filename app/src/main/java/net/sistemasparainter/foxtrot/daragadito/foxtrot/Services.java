@@ -47,10 +47,6 @@ public interface Services {
 
     // LOGIN
         @POST("login")
-        Call<Cliente> doLogin(@Body JSONObject data);
-
-        /*@FormUrlEncoded
-            @POST("login")
-            Call<Cliente> doLogin(@Field("email") String email, @Field("senha") String senha);*/
+        Call<Cliente> doLogin(@Body Login login);
 
 }

@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -36,9 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
         if(prefs.getString("usuario", null) != null){
 
-            JSONObject json = null;
             try {
-                json = new JSONObject(prefs.getString("usuario", null));
+                JSONObject json = new JSONObject(prefs.getString("usuario", null));
                 Cliente u = new Cliente(json.getInt("idCliente"),
                         json.getString("nomeCompletoCliente"),
                         json.getString("emailCliente"),
@@ -63,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        final ProgressDialog progress = new ProgressDialog(LoginActivity.this);
+
         usuario = (EditText) findViewById(R.id.etUsuario);
         senha = (EditText) findViewById(R.id.etCEP);
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -78,6 +80,12 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progress.setTitle("Login");
+                progress.setMessage("Fazendo login ...");
+                progress.setCancelable(false);
+                progress.show();
+
                 try {
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
@@ -86,12 +94,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     Services service = retrofit.create(Services.class);
 
-                    /*Call<Cliente> respostaCliente = service.doLogin(usuario.getText().toString(), senha.getText().toString());
+                    Login login = new Login(usuario.getText().toString(), senha.getText().toString());
+
+                    Call<Cliente> respostaCliente = service.doLogin(login);
 
                     respostaCliente.enqueue(new Callback<Cliente>() {
                         @Override
                         public void onResponse(Call<Cliente> call, Response<Cliente> response) {
-                            System.out.println("ASD: " + call.request().toString());
 
                             usuarioLogado = response.body();
 
@@ -118,17 +127,21 @@ public class LoginActivity extends AppCompatActivity {
                                 sharedEditor.putString("usuario", clienteJson.toString());
                             }
 
+                            progress.dismiss();
+
                             SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
                             singletonClienteLogado.setClienteLogado(usuarioLogado);
+
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
                         }
 
                         @Override
                         public void onFailure(Call<Cliente> call, Throwable t) {
-                            System.out.println("ASD: " + call.request().toString());
-
+                            progress.dismiss();
                             sd.showMessage("Usuário ou senha inválidos","Erro");
                         }
-                    });*/
+                    });
 
                 } catch (Exception e) {
                     e.printStackTrace();

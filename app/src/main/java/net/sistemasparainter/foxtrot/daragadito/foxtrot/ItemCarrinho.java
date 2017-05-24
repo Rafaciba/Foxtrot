@@ -22,5 +22,11 @@ public class ItemCarrinho {
         return quantidade;
     }
 
+    public Produto getProduto() {
+        return produto;
+    }
 
+    public void incQuantidade(){
+        this.quantidade ++;
+    }
 }

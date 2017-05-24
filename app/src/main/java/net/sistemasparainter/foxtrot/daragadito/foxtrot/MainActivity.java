@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if(!prefs.getBoolean("aceito", false)) {
+        if(prefs.getBoolean("aceito", false)) {
             Intent intent = new Intent(MainActivity.this, TermosActivity.class);
             startActivity(intent);
             return;
@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
 
                 if (id == R.id.nav_produtos) {
-//                    ProdutosFragment fragment = new ProdutosFragment();
-//                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-//                    return true;
+                    ProdutosFragment fragment = new ProdutosFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+                    return true;
                 } else if (id == R.id.nav_gallery) {
 
                 } else if (id == R.id.nav_slideshow) {

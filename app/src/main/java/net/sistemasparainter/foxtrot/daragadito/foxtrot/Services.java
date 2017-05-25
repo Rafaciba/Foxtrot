@@ -20,9 +20,31 @@ public interface Services {
         @GET("cliente/{idCliente}")
         Call<Cliente> getCliente(@Path("idCliente") String idCliente);
 
+
     // ENDEREÇO
         @POST("endereco")
-        Call<Void> setEndereco(Endereco endereco);
-        @GET("endereco")
-        Call<Endereco> getEndereco(Endereco endereco);
+        Call<Void> setEndereco(@Body Endereco endereco);
+
+        @GET("endereco/{idCliente}")
+        Call<Endereco> getEndereco(@Path("idCliente") String idCliente);
+
+
+    // PRODUTOS
+        @GET("produto}")
+        Call<Endereco> getProdutos();
+
+        @GET("produto/{idProduto}")
+        Call<Endereco> getProduto(@Path("idProduto") String idProduto);
+
+        @GET("produto/{idCategoria}")
+        Call<Endereco> getProdutoCategoria(@Path("idCategoria") String idCategoria);
+
+        @GET("produto/busca/{busca}")
+        Call<Endereco> getProdutoBusca(@Path("busca") String busca);
+
+
+    // LOGIN
+        @POST("login")
+        Call<Cliente> doLogin(@Body String email, String senha);
+
 }

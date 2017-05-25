@@ -18,9 +18,9 @@ public class SingletonCarrinho {
         return INSTANCE;
     }
 
-    public void AdicionaCarrinho (Produto p) { carrinho.add(p); };
+    public void AdicionaCarrinho (Produto p) { carrinho.add(p); }
 
-    public void ExcluirCarrinho (int index) { carrinho.remove(index); };
+    public void ExcluirCarrinho (int index) { carrinho.remove(index); }
 
     public BigDecimal TotalCarrinho () {
 

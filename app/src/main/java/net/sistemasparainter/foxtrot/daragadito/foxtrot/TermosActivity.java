@@ -27,7 +27,7 @@ public class TermosActivity extends AppCompatActivity {
 
         Boolean aceito = preference.getBoolean("aceito", false);
         if(aceito){
-            Intent intent = new Intent(TermosActivity.this, MainActivity.class);
+            Intent intent = new Intent(TermosActivity.this, LoginActivity.class);
             startActivity(intent);
         }
 
@@ -52,11 +52,10 @@ public class TermosActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preference.edit();
                 editor.putBoolean("aceito",true);
                 editor.apply();
-                Intent intent = new Intent(TermosActivity.this, LoginActivity.class);
+                Intent intent = new Intent(TermosActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-
 
 
     }

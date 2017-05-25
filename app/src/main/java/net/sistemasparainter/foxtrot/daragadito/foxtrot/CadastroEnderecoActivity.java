@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CadastroEnderecoActivity extends AppCompatActivity {
 
@@ -62,13 +63,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                     // PEGA O CLIENTE QUE ESTÁ LOGADO E PEGA SEU ID
 
                     SingletonCliente singletonCliente = SingletonCliente.getInstance();
-                    Cliente cliente = singletonCliente.getClienteLogado();
-//                    int idCliente = cliente.getIdCliente();
-                    int idCliente = 88;
+                    final Cliente cliente = singletonCliente.getClienteLogado();
+                    int idCliente = cliente.getIdCliente();
+
 
 
                     // CRIA UM OBJETO DE ENDEREÇO PARA CADASTRA-LO VIA RETROFIT
-                    Endereco novoEnderecoCliente =  new Endereco(
+                    final Endereco novoEnderecoCliente =  new Endereco(
                             idCliente,
                             etNomeEndereco.getText().toString(),
                             etCEP.getText().toString(),
@@ -82,7 +83,8 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
                     // ENVIO DO OBJETO ENDEREÇO PARA O RETROFIT
                     Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://kymera.solutions/foxtrot/")
+                            .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
+                            .addConverterFactory(GsonConverterFactory.create())
                             .build();
 
                     Services service = retrofit.create(Services.class);
@@ -97,8 +99,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
                             Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
 
-                            int idEndereco = 98;
-//                        novoEnderecoCliente.setCliente(cliente);
+                            novoEnderecoCliente.setCliente(cliente);
                             showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
                         }
 

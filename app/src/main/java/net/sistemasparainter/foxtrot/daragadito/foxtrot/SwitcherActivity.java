@@ -74,5 +74,6 @@ public class SwitcherActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
     }
 }

@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,14 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usuario;
@@ -19,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private CheckBox cbManterLogado;
     ShowDialog sd = new ShowDialog(LoginActivity.this);
+    private Cliente usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
         if(prefs.getString("usuario", null) != null){
 
-            JSONObject json = null;
             try {
-                json = new JSONObject(prefs.getString("usuario", null));
+                JSONObject json = new JSONObject(prefs.getString("usuario", null));
                 Cliente u = new Cliente(json.getInt("idCliente"),
                         json.getString("nomeCompletoCliente"),
                         json.getString("emailCliente"),
@@ -54,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        final ProgressDialog progress = new ProgressDialog(LoginActivity.this);
+
         usuario = (EditText) findViewById(R.id.etUsuario);
         senha = (EditText) findViewById(R.id.etCEP);
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -69,50 +80,68 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progress.setTitle("Login");
+                progress.setMessage("Fazendo login ...");
+                progress.setCancelable(false);
+                progress.show();
+
                 try {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
 
-                    /*HttpURLConnection urlConnection = (HttpURLConnection) new URL("").openConnection();
+                    Services service = retrofit.create(Services.class);
 
-                    InputStream in = urlConnection.getInputStream();
+                    Login login = new Login(usuario.getText().toString(), senha.getText().toString());
 
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+                    Call<Cliente> respostaCliente = service.doLogin(login);
 
-                    StringBuilder resultado = new StringBuilder();
-                    String linha = bufferedReader.readLine();
+                    respostaCliente.enqueue(new Callback<Cliente>() {
+                        @Override
+                        public void onResponse(Call<Cliente> call, Response<Cliente> response) {
 
-                    while (linha != null) {
-                        resultado.append(linha);
-                        linha = bufferedReader.readLine();
-                    }
+                            usuarioLogado = response.body();
 
-                    String respostaCompleta = resultado.toString();*/
+                            JSONObject clienteJson = new JSONObject();
+                            try {
+                                clienteJson.put("idCliente", usuarioLogado.getIdCliente());
+                                clienteJson.put("nomeCompletoCliente", usuarioLogado.getNomeCompletoCliente());
+                                clienteJson.put("emailCliente", usuarioLogado.getEmailCliente());
+                                clienteJson.put("senhaCliente", usuarioLogado.getSenhaCliente());
+                                clienteJson.put("CPFCliente", usuarioLogado.getCPFCliente());
+                                clienteJson.put("celularCliente", usuarioLogado.getCelularCliente());
+                                clienteJson.put("telComercialCliente", usuarioLogado.getTelComercialCliente());
+                                clienteJson.put("telResidencialCliente", usuarioLogado.getTelResindencialCliente());
+                                clienteJson.put("dtNascCliente", usuarioLogado.getDtNascCliente());
+                                clienteJson.put("recebeNewsLetter", usuarioLogado.getRecebeNewsLetter());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                    String respostaCompleta = "{\"idCliente\":1,\"nomeCompletoCliente\":\"Thiago\",\"emailCliente\":\"thiago@bolodesal.com.br\"," +
-                                        "\"senhaCliente\":\"bolodesal\", \"CPFCliente\":\"98765432100\",\"celularCliente\":\"11987654321\","+
-                                        "\"telComercialCliente\":\"55654175\",\"dtNascCliente\":\"1992-07-30\",\"recebeNewsLetter\":0}";
+                            if(cbManterLogado.isChecked()) {
+                                //TODO sharedPreferences Login
+                                SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                                SharedPreferences.Editor sharedEditor = prefs.edit();
+                                sharedEditor.putString("usuario", clienteJson.toString());
+                            }
 
-                    JSONObject json = new JSONObject(respostaCompleta);
+                            progress.dismiss();
 
-                    Cliente u = new Cliente(json.getInt("idCliente"),
-                            json.getString("nomeCompletoCliente"),
-                            json.getString("emailCliente"),
-                            json.getString("senhaCliente"),
-                            json.getString("CPFCliente"),
-                            (json.getString("celularCliente") != null)?json.getString("celularCliente"):"",
-                            (json.getString("telComercialCliente") != null)?json.getString("telComercialCliente"):"",
-                            (json.getString("telResidencialCliente") != null)?json.getString("telResidencialCliente"):"",
-                            json.getString("dtNascCliente"),
-                            json.getInt("recebeNewsLetter"));
+                            SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                            singletonClienteLogado.setClienteLogado(usuarioLogado);
 
-                    if(cbManterLogado.isChecked()) {
-                        //TODO sharedPreferences Login
-                        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-                        SharedPreferences.Editor sharedEditor = prefs.edit();
-                        sharedEditor.putString("usuario",respostaCompleta);
-                    }
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                        }
 
-                    SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
-                    singletonClienteLogado.setClienteLogado(u);
+                        @Override
+                        public void onFailure(Call<Cliente> call, Throwable t) {
+                            progress.dismiss();
+                            sd.showMessage("Usuário ou senha inválidos","Erro");
+                        }
+                    });
 
                 } catch (Exception e) {
                     e.printStackTrace();

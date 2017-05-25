@@ -16,7 +16,7 @@ public class Produto {
     private int qtdMinEstoque;
     private String imagem;
 
-    public Produto(int idProduto, String nomeProduto, String descProduto, BigDecimal precProduto, BigDecimal descontoPromocao, int idCategoria, boolean ativoProduto, int idUsuario, int qtdMinEstoque, String imagem) {
+    public Produto(int idProduto, String nomeProduto, String descProduto, BigDecimal precProduto, BigDecimal descontoPromocao, int idCategoria, boolean ativoProduto, int idUsuario, int qtdMinEstoque) {
         this.idProduto = idProduto;
         this.nomeProduto = nomeProduto;
         this.descProduto = descProduto;
@@ -26,7 +26,6 @@ public class Produto {
         this.ativoProduto = ativoProduto;
         this.idUsuario = idUsuario;
         this.qtdMinEstoque = qtdMinEstoque;
-        this.imagem = imagem;
     }
 
     public int getIdProduto() {

@@ -4,6 +4,8 @@ import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -42,9 +44,15 @@ public interface Services {
         @GET("produto/busca/{busca}")
         Call<Produto> getProdutoBusca(@Path("busca") String busca);
 
+    // CATEGORIA
+        @GET("categoria")
+        Call<Categoria> getCategoria();
+
+        @GET("categoria/{idCategoria}")
+        Call<Categoria> getCategoria(@Path("idCategoria") String idCategoria);
 
     // LOGIN
         @POST("login")
-        Call<Cliente> doLogin(@Body String email, String senha);
+        Call<Cliente> doLogin(@Body Login login);
 
 }

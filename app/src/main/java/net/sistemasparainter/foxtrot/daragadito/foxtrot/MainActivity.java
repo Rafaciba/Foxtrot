@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 //        drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, QRCodeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

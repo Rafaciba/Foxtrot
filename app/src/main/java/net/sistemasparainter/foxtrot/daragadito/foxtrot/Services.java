@@ -42,6 +42,12 @@ public interface Services {
         @GET("produto/busca/{busca}")
         Call<Endereco> getProdutoBusca(@Path("busca") String busca);
 
+    // CATEGORIA
+        @GET("categoria")
+        Call<Categoria> getCategoria();
+
+        @GET("categoria/{idCategoria}")
+        Call<Endereco> getCategoria(@Path("idCategoria") String idCategoria);
 
     // LOGIN
         @POST("login")

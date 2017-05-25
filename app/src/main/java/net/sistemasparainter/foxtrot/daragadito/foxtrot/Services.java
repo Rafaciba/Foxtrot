@@ -30,17 +30,17 @@ public interface Services {
 
 
     // PRODUTOS
-        @GET("produto}")
-        Call<Endereco> getProdutos();
+        @GET("produto")
+        Call<Produto> getProdutos();
 
         @GET("produto/{idProduto}")
-        Call<Endereco> getProduto(@Path("idProduto") String idProduto);
+        Call<Produto> getProduto(@Path("idProduto") String idProduto);
 
         @GET("produto/{idCategoria}")
-        Call<Endereco> getProdutoCategoria(@Path("idCategoria") String idCategoria);
+        Call<Produto> getProdutoCategoria(@Path("idCategoria") String idCategoria);
 
         @GET("produto/busca/{busca}")
-        Call<Endereco> getProdutoBusca(@Path("busca") String busca);
+        Call<Produto> getProdutoBusca(@Path("busca") String busca);
 
 
     // LOGIN

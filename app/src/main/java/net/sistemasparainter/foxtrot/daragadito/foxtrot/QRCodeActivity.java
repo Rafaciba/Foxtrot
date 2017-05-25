@@ -50,10 +50,12 @@ public class QRCodeActivity extends AppCompatActivity {
             @Override
             public void handleResult(Result result) {
                 // show the scanner result into dialog box.
-                showDialog.showMessage(result.getText().toString(), "ID do Produto");
-//                output.putExtra("return", result.getText().toString());
-//                setResult(RESULT_OK, output);
-//                finish();
+                // showDialog.showMessage(result.getText().toString(), "ID do Produto");
+                output.putExtra("idProduto", result.getText().toString());
+                setResult(RESULT_OK, output);
+                Intent intent = new Intent(QRCodeActivity.this, ProdutoDetalheActivity.class);
+                startActivity(intent);
+                // finish();
             }
         });
 

@@ -29,7 +29,7 @@
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec diam nunc, mollis quis consequat vel, venenatis cursus mi. "
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9"
+        android:id="@+id/descriptionProductDetails"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_marginTop="13dp"
         android:layout_below="@+id/precoProdutoDetails"

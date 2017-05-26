@@ -55,4 +55,8 @@ public interface Services {
         @POST("login")
         Call<Cliente> doLogin(@Body Login login);
 
+    // IMAGEM DO PRODUTO
+        @GET("imagem")
+        Call<byte[]> getImagemProduto(@Path("param") String imagemId, @Path("width") int IMG_WIDTH, @Path("height") int IMG_HEIGHT);
+
 }

@@ -2,6 +2,8 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -33,7 +35,7 @@ public interface Services {
 
     // PRODUTOS
         @GET("produto")
-        Call<Produto> getProdutos();
+        Call<ArrayList<Produto>> getProdutos();
 
         @GET("produto/{idProduto}")
         Call<Produto> getProduto(@Path("idProduto") String idProduto);

@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Começa com o fragment de produtos inflado
+        ProdutosFragment fragment = new ProdutosFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+
 
     }
 }

@@ -46,6 +46,7 @@
         </activity>
 
         <activity android:name=".CadastroEnderecoActivity"></activity>
+        <activity android:name=".ProdutoDetalheActivity" android:parentActivityName=".MainActivity"></activity>
 
     </application>
 

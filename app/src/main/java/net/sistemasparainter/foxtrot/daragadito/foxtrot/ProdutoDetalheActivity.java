@@ -2,6 +2,7 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.Intent;
 import android.media.Image;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -26,6 +27,9 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_produto_detalhe);
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
 
         imageProductDetails = (ImageView) findViewById(R.id.imageProductDetails);
         nameProductDetatils = (TextView) findViewById(R.id.nameProductDetatils);

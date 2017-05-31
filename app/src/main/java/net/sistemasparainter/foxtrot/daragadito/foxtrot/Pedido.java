@@ -11,7 +11,7 @@ public class Pedido {
     idAplicacao (1-Managment Studio, 2-Mobile, 3-Web)
      */
     private int idPedido;
-    private int Cliente;
+    private int cliente;
     private int idStatus;
     private String dataPedido;
     private int idTipoPagto;
@@ -20,7 +20,7 @@ public class Pedido {
 
     public Pedido(int idPedido, int cliente, int idStatus, String dataPedido, int idTipoPagto, int idEndereco, int idAplicacao) {
         this.idPedido = idPedido;
-        Cliente = cliente;
+        this.cliente = cliente;
         this.idStatus = idStatus;
         this.dataPedido = dataPedido;
         this.idTipoPagto = idTipoPagto;
@@ -37,11 +37,11 @@ public class Pedido {
     }
 
     public int getCliente() {
-        return Cliente;
+        return cliente;
     }
 
     public void setCliente(int cliente) {
-        Cliente = cliente;
+        this.cliente = cliente;
     }
 
     public int getIdStatus() {

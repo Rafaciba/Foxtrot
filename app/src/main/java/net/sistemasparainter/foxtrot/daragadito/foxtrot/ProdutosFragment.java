@@ -99,7 +99,7 @@ public class ProdutosFragment extends Fragment {
         TextView nomeProduto = (TextView) cardView.findViewById(R.id.tvNomeProduto);
         nomeProduto.setText(p.getNomeProduto());
 
-        TextView descProduto = (TextView) cardView.findViewById(R.id.idDescricaoProduto);
+        TextView descProduto = (TextView) cardView.findViewById(R.id.tvDescricaoProduto);
         descProduto.setText(p.getDescProduto());
 
         TextView precProduto = (TextView) cardView.findViewById(R.id.tvPrecoProduto);

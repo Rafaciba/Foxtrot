@@ -93,10 +93,10 @@ public class ProdutosFragment extends Fragment {
 
         CardView cardView = (CardView) getLayoutInflater(bundle).inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
 
-        ImageView verImagem = (ImageView) cardView.findViewById(R.id.ivImagemProduto);
+        ImageView verImagem = (ImageView) cardView.findViewById(R.id.imgProdutoCarrinho);
         imageLoader.displayImage("http://foxtrotws.azurewebsites.net/g1/rest/imagem/"+p.getIdProduto()+"/50/50", verImagem);
 
-        TextView nomeProduto = (TextView) cardView.findViewById(R.id.tvNomeProduto);
+        TextView nomeProduto = (TextView) cardView.findViewById(R.id.NomeProdutoCarrinho);
         nomeProduto.setText(p.getNomeProduto());
 
         TextView descProduto = (TextView) cardView.findViewById(R.id.tvDescricaoProduto);

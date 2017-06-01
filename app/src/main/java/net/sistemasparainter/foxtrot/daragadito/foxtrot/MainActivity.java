@@ -19,9 +19,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
-
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
 
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+//        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        // Começa com o fragment de produtos inflado
+        ProdutosFragment fragment = new ProdutosFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
 
     }
 

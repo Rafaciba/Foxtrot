@@ -96,17 +96,25 @@ public class CadastroActivity extends AppCompatActivity {
                     respostaCliente.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+                            if(response.isSuccessful()){
+                                if(response.code() == 200){
+                                    showDialog.showMessage("E-mail já cadastrado...","Erro");
+                                }else if(response.code() == 201){
+                                    Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
+                                    i.putExtra("email", etEmail.getText().toString());
+                                    i.putExtra("senha", etSenha.getText().toString());
+                                    showDialog.showMessageAndRedirect("Cliente cadastrado com sucesso!","Sucesso", i);
+                                }else if(response.code() == 500){
+                                    showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
+                                }
+                            }
 
-                            Intent i = new Intent(CadastroActivity.this, LoginActivity.class);
-                            i.putExtra("email", etEmail.getText().toString());
-                            i.putExtra("senha", etSenha.getText().toString());
-                            showDialog.showMessageAndRedirect("Cliente cadastrado com sucesso!","Sucesso", i);
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+                            showDialog.showMessage("Erro...","Erro");
 
-                            showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
                         }
                     });
 

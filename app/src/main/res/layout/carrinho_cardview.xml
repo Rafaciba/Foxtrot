@@ -82,7 +82,7 @@
                     android:text="-"
                     android:layout_width="33dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/diminuirCarrinho]" />
+                    android:id="@+id/diminuirCarrinho" />
 
                 <TextView
                     android:text="1"

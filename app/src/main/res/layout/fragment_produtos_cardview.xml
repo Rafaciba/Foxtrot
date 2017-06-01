@@ -19,17 +19,19 @@
             <ImageView
                 android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/ivImagemProduto"
+                android:id="@+id/imgProdutoCarrinho"
                 android:layout_weight="0.33"
                 android:layout_width="77dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_alignParentStart="true" />
+
             <LinearLayout
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" >
+
                 <TextView
                     android:text="Nome do Produto"
                     android:layout_width="wrap_content"
@@ -38,19 +40,19 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="1dp"
-                    android:id="@+id/tvNomeProduto"
+                    android:id="@+id/NomeProdutoCarrinho"
                     android:textSize="24sp"
-                    android:layout_alignTop="@+id/ivImagemProduto"
-                    android:layout_toEndOf="@+id/ivImagemProduto"
+                    android:layout_alignTop="@+id/imgProdutoCarrinho"
+                    android:layout_toEndOf="@+id/imgProdutoCarrinho"
                     android:textStyle="normal|bold"
-                    android:layout_gravity="left"/>
+                    android:layout_gravity="left" />
 
                 <TextView
                     android:id="@+id/tvDescricaoProduto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/ivImagemProduto"
-                    android:layout_alignStart="@+id/tvNomeProduto"
+                    android:layout_alignBottom="@+id/imgProdutoCarrinho"
+                    android:layout_alignStart="@+id/NomeProdutoCarrinho"
                     android:layout_gravity="left"
                     android:layout_marginLeft="10dp"
                     android:text="Descrição do Produto" />

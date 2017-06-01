@@ -97,10 +97,18 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
 
-                            Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
+                            if(response.isSuccessful()){
+                                if(response.code() == 200){
+                                    showDialog.showMessage("Nome já cadastrado...","Erro");
+                                }else if(response.code() == 201){
+                                    Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
 
-                            novoEnderecoCliente.setCliente(cliente);
-                            showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
+                                    novoEnderecoCliente.setCliente(cliente);
+                                    showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
+                                }else if(response.code() == 500){
+                                    showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
+                                }
+                            }
                         }
 
                         @Override

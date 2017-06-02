@@ -30,6 +30,7 @@ public class ProdutosFragment extends Fragment {
 
     private ViewGroup linearContainer;
     private ImageLoader imageLoader = ImageLoader.getInstance();
+    private ArrayList<Produto> produtosArrayList = null;
 
     public ProdutosFragment() {
         // Required empty public constructor
@@ -42,7 +43,7 @@ public class ProdutosFragment extends Fragment {
 
         View fragmentView = inflater.inflate(R.layout.fragment_produtos, container, false);
 
-        final Bundle sii = savedInstanceState;
+        final LayoutInflater li = inflater;
 
         linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearContainer);
 
@@ -57,21 +58,31 @@ public class ProdutosFragment extends Fragment {
 
         Call<ArrayList<Produto>> produtos = service.getProdutos();
 
-        produtos.enqueue(new Callback<ArrayList<Produto>>() {
-            @Override
-            public void onResponse(Call<ArrayList<Produto>> call, Response<ArrayList<Produto>> response) {
-                ArrayList<Produto> produtosArrayList = response.body();
+        try {
+            produtos.enqueue(new Callback<ArrayList<Produto>>() {
+                @Override
+                public void onResponse(Call<ArrayList<Produto>> call, Response<ArrayList<Produto>> response) {
+                    produtosArrayList = response.body();
 
-                for(Produto p : produtosArrayList){
-                    addCardView(p, sii);
+                    for(Produto p : produtosArrayList){
+                        addCardView(p, li);
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ArrayList<Produto>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<ArrayList<Produto>> call, Throwable t) {
 
+                }
+            });
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        /*if(produtosArrayList != null){
+            for(Produto p : produtosArrayList){
+                addCardView(p, savedInstanceState);
             }
-        });
+        }*/
 
 
         /*ArrayList<String> urls = new ArrayList<>();
@@ -89,12 +100,17 @@ public class ProdutosFragment extends Fragment {
         // Inflate the layout for this fragment
         return fragmentView;
     }
-    private void addCardView(Produto p, Bundle bundle) {
+    private void addCardView(Produto p, LayoutInflater inflater) {
 
-        CardView cardView = (CardView) getLayoutInflater(bundle).inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
+        CardView cardView = (CardView) inflater.inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
 
-        ImageView verImagem = (ImageView) cardView.findViewById(R.id.imgProdutoCarrinho);
-        imageLoader.displayImage("http://foxtrotws.azurewebsites.net/g1/rest/imagem/"+p.getIdProduto()+"/50/50", verImagem);
+        try {
+            ImageView verImagem = (ImageView) cardView.findViewById(R.id.imgProdutoCarrinho);
+            imageLoader.displayImage("http://10.135.226.19:8080/WSECommerce/rest/imagem/" + p.getIdProduto() + "/50/50", verImagem);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
 
         TextView nomeProduto = (TextView) cardView.findViewById(R.id.NomeProdutoCarrinho);
         nomeProduto.setText(p.getNomeProduto());

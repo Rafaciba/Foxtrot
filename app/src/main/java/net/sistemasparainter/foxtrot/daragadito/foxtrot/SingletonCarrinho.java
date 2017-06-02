@@ -34,6 +34,10 @@ public class SingletonCarrinho {
 
     }
 
+    public ArrayList<Produto> getProdutosCarrinho(){
+        return carrinho;
+    }
+
 }
 
 

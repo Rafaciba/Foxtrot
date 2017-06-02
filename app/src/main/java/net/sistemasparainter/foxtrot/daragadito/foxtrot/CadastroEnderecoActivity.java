@@ -72,13 +72,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                     final Endereco novoEnderecoCliente =  new Endereco(
                             idCliente,
                             etNomeEndereco.getText().toString(),
-                            etCEP.getText().toString(),
                             etLogradouroEndereco.getText().toString(),
                             etNumeroEndereco.getText().toString(),
+                            etCEP.getText().toString(),
                             etComplementoEndereco.getText().toString(),
                             etCidade.getText().toString(),
-                            etEstado.getText().toString(),
-                            etPais.getText().toString()
+                            etPais.getText().toString(),
+                            etEstado.getText().toString()
                     );
 
                     // ENVIO DO OBJETO ENDEREÇO PARA O RETROFIT
@@ -97,6 +97,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
 
+
                             if(response.isSuccessful()){
                                 if(response.code() == 200){
                                     showDialog.showMessage("Nome já cadastrado...","Erro");
@@ -109,6 +110,9 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                                     showDialog.showMessage("Erro ao cadastrar cliente...","Erro");
                                 }
                             }
+                            else {
+                                System.out.println(response.message());
+                            }
                         }
 
                         @Override
@@ -117,10 +121,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                             showDialog.showMessage("Erro ao cadastrar endereço...","Erro");
                         }
                     });
+                    respostaServico.execute();
 
 
                 }catch(Exception e){
-
+                    e.printStackTrace();
                 }
             }
         });

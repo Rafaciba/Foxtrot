@@ -54,7 +54,6 @@ public class CarrinhoActivity extends AppCompatActivity {
             int singletonIndex = 0;
             for(ItemCarrinho ic : singletonCarrinho.getItensCarrinho()) {
                 addCardView(ic, singletonIndex);
-                //showDialog.showMessage(ic.getProduto().getNomeProduto(),"teste");
                 singletonIndex++;
             }
 
@@ -73,7 +72,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     private void addCardView(ItemCarrinho p, int index){
         CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.carrinho_cardview, linearContainer, false);
 
-        final ItemCarrinho itemcarrinho = p;
+        final ItemCarrinho itemCarrinho = p;
         final int singletonIndex= index;
 
         ImageView imgItemCarrinho = (ImageView) cardView.findViewById(R.id.imgItemCarrinho);
@@ -94,6 +93,7 @@ public class CarrinhoActivity extends AppCompatActivity {
                 if(!tvQtItemCarrinho.getText().toString().equals("1")){
                     int qtItemCarrinho = Integer.parseInt(tvQtItemCarrinho.getText().toString())-1;
                     tvQtItemCarrinho.setText(String.valueOf(qtItemCarrinho ));
+                    singletonCarrinho.decrementItemCarrinho(singletonIndex);
                 }
             }
         });
@@ -104,6 +104,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int qtItemCarrinho = Integer.parseInt(tvQtItemCarrinho.getText().toString())+1;
                 tvQtItemCarrinho.setText(String.valueOf(qtItemCarrinho ));
+                singletonCarrinho.incrementItemCarrinho(singletonIndex);
             }
         });
 
@@ -111,9 +112,8 @@ public class CarrinhoActivity extends AppCompatActivity {
         removeItemCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog.showMessage(String.valueOf(singletonIndex),"teste");
                 singletonCarrinho.RemoverItemCarrinho(singletonIndex);
-
+                linearContainer.removeViewAt(singletonIndex);
             }
         });
 
@@ -122,13 +122,14 @@ public class CarrinhoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(CarrinhoActivity.this,ProdutoDetalheActivity.class);
-                i.putExtra("idProduto", ""+itemcarrinho.getProduto().getIdProduto());
+                i.putExtra("idProduto", ""+itemCarrinho.getProduto().getIdProduto());
                 startActivity(i);
             }
         });
 
-        tvTituloItemCarrinho.setText(itemcarrinho.getProduto().getNomeProduto());
-        tvValorItemCarrinho.setText(itemcarrinho.getProduto().getPrecProduto().toString());
+        tvTituloItemCarrinho.setText(itemCarrinho.getProduto().getNomeProduto());
+        tvValorItemCarrinho.setText(itemCarrinho.getProduto().getPrecProduto().toString());
+        tvQtItemCarrinho.setText(String.valueOf(itemCarrinho.getQuantidade()));
 
         linearContainer.addView(cardView);
     }

@@ -22,6 +22,12 @@ public class SingletonCarrinho {
     public void AdicionaCarrinho (Produto p) {
         if(!temItem(p)){
             carrinho.add(new ItemCarrinho(p));
+        }else{
+            for(ItemCarrinho ic : carrinho){
+                if(ic.getProduto().getIdProduto() == p.getIdProduto()){
+                    ic.incQuantidade();
+                }
+            }
         }
     }
 
@@ -66,6 +72,15 @@ public class SingletonCarrinho {
         }else{
             return false;
         }
+    }
+
+
+    public void incrementItemCarrinho(int index){
+        carrinho.get(index).incQuantidade();
+    }
+
+    public void decrementItemCarrinho(int index){
+        carrinho.get(index).decQuantidade();
     }
 
 }

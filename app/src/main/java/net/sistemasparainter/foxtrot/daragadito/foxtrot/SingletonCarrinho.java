@@ -43,7 +43,8 @@ public class SingletonCarrinho {
         BigDecimal total = BigDecimal.valueOf(0);
 
         for(ItemCarrinho ic : carrinho) {
-            total.add(ic.getProduto().getPrecProduto());
+            System.out.println(ic.getQuantidade());
+            total.add(ic.getProduto().getPrecProduto().multiply(BigDecimal.valueOf(ic.getQuantidade())));
         }
 
         return total;

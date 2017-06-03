@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -60,9 +62,18 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
                     return true;
                 } else if (id == R.id.nav_sobre) {
-
+                    Intent i = new Intent(MainActivity.this, SobreActivity.class);
+                    startActivity(i);
                 } else if (id == R.id.nav_status_login) {
+                    SingletonCliente singletonCliente = SingletonCliente.getInstance();
 
+                    if (singletonCliente.estaLogado()){
+                        menuItem.setTitle(R.string.cliente_deslogado);
+                    }else{
+                        menuItem.setTitle(R.string.cliente_logado);
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i);
+                    }
                 }
 
                 return false;
@@ -70,9 +81,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.setDrawerListener(toggle);
+        toggle =
+                new ActionBarDrawerToggle(this, drawer,
+                        R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+                };
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -139,20 +152,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.search_field) {
-            return true;
-        }else if(id == R.id.menuCarrinho){
-            Intent i = new Intent(MainActivity.this, CarrinhoActivity.class);
-            startActivity(i);
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

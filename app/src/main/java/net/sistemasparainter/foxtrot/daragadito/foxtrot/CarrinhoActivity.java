@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 
@@ -24,6 +25,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     protected ViewGroup linearContainer;
     protected Button btProsseguir;
+    protected TextView tvTotal;
 
     // INSTANCIA O SINGLETON QUE CONTÉM O CARRINHO
     SingletonCarrinho singletonCarrinho = SingletonCarrinho.getInstance();
@@ -46,6 +48,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         linearContainer = (ViewGroup) findViewById(R.id.linearContainerCarrinho);
         btProsseguir = (Button) findViewById(R.id.btProsseguir);
+        tvTotal = (TextView) findViewById(R.id.tvTotal);
 
         if(singletonCarrinho.checaSeCarrinhoVazio()){
 
@@ -61,6 +64,7 @@ public class CarrinhoActivity extends AppCompatActivity {
                 }
             });
         }else{
+
             btProsseguir.setText("Fianlizar compra");
 
             // CRIA UM CARDVIEW PARA CADA ITEM DO CARRINHO

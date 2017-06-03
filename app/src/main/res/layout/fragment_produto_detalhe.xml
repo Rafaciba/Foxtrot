@@ -14,7 +14,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <ImageView
                 android:id="@+id/imageProductDetails"
@@ -26,14 +28,6 @@
                 app:srcCompat="@drawable/ic_menu_gallery" />
 
             <TextView
-                android:id="@+id/categoriaProductDetails"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                android:text="Categoria Produto" />
-
-            <TextView
                 android:id="@+id/nameProductDetatils"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,6 +37,13 @@
                 android:text="Nome do Produto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/categoriaProductDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Categoria Produto" />
 
             <TextView
                 android:id="@+id/precoProdutoDetails"

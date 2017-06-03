@@ -59,13 +59,12 @@ public class MainActivity extends AppCompatActivity {
                     CategoriasFragment fragment = new CategoriasFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
                     return true;
-                } else if (id == R.id.nav_gallery) {
+                } else if (id == R.id.nav_sobre) {
 
-                } else if (id == R.id.nav_slideshow) {
-
-                } else if (id == R.id.nav_manage) {
+                } else if (id == R.id.nav_status_login) {
 
                 }
+
                 return false;
             }
         });

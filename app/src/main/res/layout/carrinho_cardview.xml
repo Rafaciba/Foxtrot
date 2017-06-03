@@ -28,9 +28,9 @@
 
         <LinearLayout
             android:layout_gravity="center"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_width="180dp">
             <TextView
                 android:text="Nome do Produto"
                 android:layout_width="wrap_content"
@@ -43,7 +43,8 @@
                 android:layout_alignTop="@+id/imgItemCarrinho"
                 android:layout_toEndOf="@+id/imgItemCarrinho"
                 android:layout_gravity="left"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:maxWidth="200dp" />
 
             <TextView
                 android:id="@+id/tvValorItemCarrinho"
@@ -54,16 +55,16 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:text="R$ 45,00"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="71dp"
             android:layout_height="122dp"
             android:layout_weight="0.18"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_width="90dp">
 
             <ImageView
                 android:id="@+id/removeItemCarrinho"

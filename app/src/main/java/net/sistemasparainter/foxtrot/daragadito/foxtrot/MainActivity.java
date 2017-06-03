@@ -86,6 +86,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Começa com o fragment de categorias inflado
+        Intent i = getIntent();
+        if((i != null) && (i.getStringExtra("fragment") != null)){
+            String pagina = i.getStringExtra("fragment");
+            if(pagina == "resumo"){
+                ResumoCompraFragment fragment = new ResumoCompraFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+            }
+
+        }else{
+            CategoriasFragment fragment = new CategoriasFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+        }
+
         CategoriasFragment fragment = new CategoriasFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
 

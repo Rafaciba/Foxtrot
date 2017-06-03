@@ -58,7 +58,7 @@ public class CarrinhoActivity extends AppCompatActivity {
                 }
             });
         }else{
-            btProsseguir.setText("Prosseguir para o caixa");
+            btProsseguir.setText("Fianlizar compra");
 
             // CRIA UM CARDVIEW PARA CADA ITEM DO CARRINHO
             int singletonIndex = 0;
@@ -71,7 +71,8 @@ public class CarrinhoActivity extends AppCompatActivity {
             btProsseguir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
+                    startActivity(i);
                 }
             });
         }

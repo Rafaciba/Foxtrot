@@ -1,7 +1,10 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -75,6 +79,13 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
         String idProduto = i.getStringExtra("idProduto");
 
+        final ProgressDialog progress = new ProgressDialog(ProdutoDetalheActivity.this);
+
+        progress.setTitle("Carregando");
+        progress.setMessage("Carregando os dados do produto ...");
+        progress.setCancelable(false);
+        progress.show();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -107,6 +118,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                         public void onResponse(Call<Categoria> call, Response<Categoria> response) {
                             if(response.isSuccessful()){
                                 categoriaProductDetails.setText(response.body().getNomeCategoria());
+
+                                progress.dismiss();
                             }
                         }
 
@@ -126,7 +139,24 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             }
         });
 
+        Call<String> imagem = service.getImagemProduto(idProduto, 50, 50);
+
+        imagem.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    byte[] decodedString = Base64.decode(response.body(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    imageProductDetails.setImageBitmap(decodedByte);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
+                t.printStackTrace();
+            }
+        });
+
     }
-
-
 }

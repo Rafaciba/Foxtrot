@@ -20,7 +20,7 @@ public class SingletonCliente {
     public void setClienteLogado(Cliente cliente){ this.clienteLogado = cliente; }
 
     public boolean estaLogado(){
-        if (clienteLogado.equals(null)){
+        if (this.clienteLogado == null){
             return false;
         }else{
             return true;

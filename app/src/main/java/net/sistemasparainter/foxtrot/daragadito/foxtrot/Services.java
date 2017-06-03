@@ -59,7 +59,7 @@ public interface Services {
 
     // IMAGEM DO PRODUTO
         @GET("imagem/{param}/{width}/{height}")
-        Call<String> getImagemProduto(@Path("param") String imagemId, @Path("width") int IMG_WIDTH, @Path("height") int IMG_HEIGHT);
+        Call<Imagem> getImagemProduto(@Path("param") String imagemId, @Path("width") int IMG_WIDTH, @Path("height") int IMG_HEIGHT);
 
     //PEDIDO
         @GET("pedido/{idPedido}")

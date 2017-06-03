@@ -19,9 +19,8 @@ public class Pedido {
     private int idTipoPagto;
     private int idEndereco;
     private int idAplicacao;
-    private ArrayList<ItemCarrinho> carrinho;
 
-    public Pedido(int idPedido, int cliente, int idStatus, String dataPedido, int idTipoPagto, int idEndereco, int idAplicacao, ArrayList<ItemCarrinho> carrinho) {
+    public Pedido(int idPedido, int cliente, int idStatus, String dataPedido, int idTipoPagto, int idEndereco, int idAplicacao) {
         this.idPedido = idPedido;
         this.cliente = cliente;
         this.idStatus = idStatus;
@@ -29,7 +28,6 @@ public class Pedido {
         this.idTipoPagto = idTipoPagto;
         this.idEndereco = idEndereco;
         this.idAplicacao = idAplicacao;
-        this.carrinho = carrinho;
     }
 
     public int getIdPedido() {
@@ -86,13 +84,5 @@ public class Pedido {
 
     public void setIdAplicacao(int idAplicacao) {
         this.idAplicacao = idAplicacao;
-    }
-
-    public ArrayList<ItemCarrinho> getCarrinho() {
-        return carrinho;
-    }
-
-    public void setCarrinho(ArrayList<ItemCarrinho> carrinho) {
-        this.carrinho = carrinho;
     }
 }

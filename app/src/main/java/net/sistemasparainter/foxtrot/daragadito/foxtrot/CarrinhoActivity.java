@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
 
 public class CarrinhoActivity extends AppCompatActivity {
@@ -71,8 +74,44 @@ public class CarrinhoActivity extends AppCompatActivity {
             btProsseguir.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
-                    startActivity(i);
+                    Intent i;
+
+                    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                    if(prefs.getString("usuario", null) != null){
+
+                        try {
+                            JSONObject json = new JSONObject(prefs.getString("usuario", null));
+                            Cliente u = new Cliente(json.getInt("idCliente"),
+                                    json.getString("nomeCompletoCliente"),
+                                    json.getString("emailCliente"),
+                                    json.getString("senhaCliente"),
+                                    json.getString("CPFCliente"),
+                                    json.getString("celularCliente"),
+                                    json.getString("telComercialCliente"),
+                                    json.getString("telResidencialCliente"),
+                                    json.getString("dtNascCliente"),
+                                    json.getInt("recebeNewsLetter"));
+
+                            SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                            singletonClienteLogado.setClienteLogado(u);
+
+                            showDialog.showMessage("Logado: "+singletonClienteLogado.getClienteLogado().getIdCliente(),"Login");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            showDialog.showMessage("Erro ao recuperar seu login.\nPor favor entre com seus dados novamente.","Erro");
+                        }
+                    }else {
+
+                        SingletonCliente singletonCliente = SingletonCliente.getInstance();
+
+                        if (singletonCliente.estaLogado()) {
+                            i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
+                        } else {
+                            i = new Intent(CarrinhoActivity.this, LoginActivity.class);
+                        }
+
+                        startActivity(i);
+                    }
                 }
             });
         }

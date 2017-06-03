@@ -141,24 +141,24 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             }
         });
 
-        /*Call<String> imagem = service.getImagemProduto(idProduto, 50, 50);
+        Call<Imagem> imagem = service.getImagemProduto(idProduto, 100, 100);
 
-        imagem.enqueue(new Callback<String>() {
+        imagem.enqueue(new Callback<Imagem>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Imagem> call, Response<Imagem> response) {
                 if(response.isSuccessful()){
-                    byte[] decodedString = Base64.decode(response.body(), Base64.DEFAULT);
+                    byte[] decodedString = Base64.decode(response.body().getImagem(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                     imageProductDetails.setImageBitmap(decodedByte);
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Imagem> call, Throwable t) {
                 showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
                 t.printStackTrace();
             }
-        });*/
+        });
 
     }
 }

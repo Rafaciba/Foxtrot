@@ -2,13 +2,17 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -120,15 +124,36 @@ public class ProdutosFragment extends Fragment {
 
         final Produto p = produto;
 
-        CardView cardView = (CardView) inflater.inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
+        final CardView cardView = (CardView) inflater.inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
 
-        /*try {
-            ImageView verImagem = (ImageView) cardView.findViewById(R.id.imgProdutoCarrinho);
-            imageLoader.displayImage("http://10.135.226.19:8080/WSECommerce/rest/imagem/" + p.getIdProduto() + "/50/50", verImagem);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }*/
+        final ImageView iv = (ImageView) cardView.findViewById(R.id.imageProductDetails);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Services service = retrofit.create(Services.class);
+
+        Call<Imagem> imagem = service.getImagemProduto(""+p.getIdProduto(), 50, 50);
+
+        imagem.enqueue(new Callback<Imagem>() {
+            @Override
+            public void onResponse(Call<Imagem> call, Response<Imagem> response) {
+                if(response.isSuccessful()){
+                    byte[] decodedString = Base64.decode(response.body().getImagem(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    if (iv != null) {
+                        iv.setImageBitmap(decodedByte);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Imagem> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
 
         TextView nomeProduto = (TextView) cardView.findViewById(R.id.nomeProdutoResumo);
         nomeProduto.setText(p.getNomeProduto());

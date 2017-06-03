@@ -73,7 +73,7 @@ public class EnderecosActivity extends AppCompatActivity {
     }
 
     private void addCardView(Endereco e){
-        CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.carrinho_cardview, linearContainer, false);
+        CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.endereco_cardview, linearContainer, false);
 
         final Endereco end = e;
 
@@ -91,6 +91,8 @@ public class EnderecosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SingletonPedido sp = SingletonPedido.getInstance();
                 sp.setEndereco(end);
+                Intent i = new Intent(EnderecosActivity.this, PagamentoActivity.class);
+                startActivity(i);
             }
         });
 

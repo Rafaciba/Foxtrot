@@ -135,10 +135,10 @@ public class LoginActivity extends AppCompatActivity {
                                 sharedEditor.putString("usuario", clienteJson.toString());
                             }
 
-                            progress.dismiss();
-
                             SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
                             singletonClienteLogado.setClienteLogado(usuarioLogado);
+
+                            progress.dismiss();
 
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);

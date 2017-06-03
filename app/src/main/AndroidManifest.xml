@@ -25,11 +25,14 @@
         </activity>
         <activity
             android:name=".QRCodeActivity"
-            android:parentActivityName=".SwitcherActivity" />
+            android:parentActivityName=".SwitcherActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SobreActivity"
-            android:parentActivityName=".SwitcherActivity" />
-        <activity android:name=".TermosActivity">
+            android:parentActivityName=".SwitcherActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".TermosActivity"
+            android:screenOrientation="portrait" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -41,22 +44,28 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroEnderecoActivity" />
+        <activity android:name=".CadastroEnderecoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProdutoDetalheActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CarrinhoActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".EnderecosActivity" />
-        <activity android:name=".PagamentoActivity"></activity>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".EnderecosActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PagamentoActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

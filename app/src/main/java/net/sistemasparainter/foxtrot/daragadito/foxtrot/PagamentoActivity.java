@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +56,8 @@ public class PagamentoActivity extends AppCompatActivity {
                 SingletonPedido sp = SingletonPedido.getInstance();
                 sp.setIdTipoPagto(tipoPagto);
 
+                showDialog.showMessage("Pré Finaliza compra","Atenção");
+
                 finalizaCompra();
             }
         });
@@ -62,14 +65,15 @@ public class PagamentoActivity extends AppCompatActivity {
     }
 
     private void finalizaCompra(){
+
         SingletonCliente sc = SingletonCliente.getInstance();
         SingletonPedido sp = SingletonPedido.getInstance();
         SingletonCarrinho carrinho = SingletonCarrinho.getInstance();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentDate = sdf.format(new Date());
 
-        Pedido p = new Pedido(0, sc.getClienteLogado().getIdCliente(), 1, currentDate, sp.getIdTipoPagto(), sp.getEndereco().getIdEndereco(), 2, carrinho.getItensCarrinho());
+        Pedido p = new Pedido(0, sc.getClienteLogado().getIdCliente(), 1, currentDate, sp.getIdTipoPagto(), sp.getEndereco().getIdEndereco(), 2);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
@@ -86,12 +90,17 @@ public class PagamentoActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful() && response.code() == 201){
                         showDialog.showMessage("Seu pedido foi enviado para a loja!","Pedido");
+                        Intent i = new Intent(PagamentoActivity.this, MainActivity.class);
+                        i.putExtra("fragment", "resumo");
+                        showDialog.showMessageAndRedirect("Seu pedido foi enviado para a loja!","Pedido", i);
                     }
+
+                    showDialog.showMessage(""+response.code(),"Code");
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-
+                    t.printStackTrace();
                 }
             });
         }catch(Exception e){

@@ -9,11 +9,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.ArrayList;
 
@@ -132,7 +130,7 @@ public class ProdutosFragment extends Fragment {
             e.printStackTrace();
         }*/
 
-        TextView nomeProduto = (TextView) cardView.findViewById(R.id.NomeProdutoCarrinho);
+        TextView nomeProduto = (TextView) cardView.findViewById(R.id.tvTituloItemCarrinho);
         nomeProduto.setText(p.getNomeProduto());
 
         TextView descProduto = (TextView) cardView.findViewById(R.id.tvDescricaoProduto);

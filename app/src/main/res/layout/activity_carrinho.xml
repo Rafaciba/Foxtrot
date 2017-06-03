@@ -12,19 +12,35 @@
     tools:context="net.sistemasparainter.foxtrot.daragadito.foxtrot.CarrinhoActivity">
 
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="60dp"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="80dp">
+
+            <LinearLayout
+                android:id="@+id/linearContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btProsseguir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/linearContainer" />
-    </ScrollView>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1" />
+
+    </RelativeLayout>
 
 
 </LinearLayout>

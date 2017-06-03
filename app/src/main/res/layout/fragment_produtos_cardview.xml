@@ -16,7 +16,7 @@
 
 
         <ImageView
-            android:id="@+id/imgProdutoCarrinho"
+            android:id="@+id/imgItemCarrinho"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -32,16 +32,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/NomeProdutoCarrinho"
+                android:id="@+id/tvTituloItemCarrinho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imgProdutoCarrinho"
+                android:layout_alignTop="@+id/imgItemCarrinho"
                 android:layout_gravity="left"
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/imgProdutoCarrinho"
+                android:layout_toEndOf="@+id/imgItemCarrinho"
                 android:maxWidth="180dp"
                 android:text="Nome do Produto"
                 android:textSize="14sp"
@@ -51,8 +51,8 @@
                 android:id="@+id/tvDescricaoProduto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imgProdutoCarrinho"
-                android:layout_alignStart="@+id/NomeProdutoCarrinho"
+                android:layout_alignBottom="@+id/imgItemCarrinho"
+                android:layout_alignStart="@+id/tvTituloItemCarrinho"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:maxLength="60"

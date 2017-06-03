@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Começa com o fragment de produtos inflado
-        ProdutosFragment fragment = new ProdutosFragment();
+        // Começa com o fragment de categorias inflado
+        CategoriasFragment fragment = new CategoriasFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
 
     }
@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
+                /*Intent i = new Intent(MainActivity.this, BuscaActivity.class);
+                i.putExtra("busca",s);
+                startActivity(i);*/
                 return false;
             }
 
@@ -131,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search_field) {
+            return true;
+        }else if(id == R.id.menuCarrinho){
+            Intent i = new Intent(MainActivity.this, CarrinhoActivity.class);
+            startActivity(i);
             return true;
         }
 

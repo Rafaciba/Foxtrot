@@ -2,9 +2,11 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.Intent;
 import android.media.Image;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
     private TextView nameProductDetatils;
     private TextView precoProdutoDetails;
     private TextView descriptionProductDetails;
+    private FloatingActionButton fabButton;
+    private Produto thisProd;
 
 
     @Override
@@ -35,8 +39,17 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         nameProductDetatils = (TextView) findViewById(R.id.nameProductDetatils);
         precoProdutoDetails = (TextView) findViewById(R.id.precoProdutoDetails);
         descriptionProductDetails = (TextView) findViewById(R.id.descriptionProductDetails);
+        fabButton = (FloatingActionButton) findViewById(R.id.fabAddCarrinho);
 
         final ShowDialog showDialog = new ShowDialog(ProdutoDetalheActivity.this);
+
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SingletonCarrinho sc = SingletonCarrinho.getInstance();
+                sc.AdicionaCarrinho(thisProd);
+            }
+        });
 
         Intent i = getIntent();
 
@@ -49,22 +62,23 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
         Services service = retrofit.create(Services.class);
 
-        Call<Produto> produto = service.getProduto(idProduto);
+        final Call<Produto> produto = service.getProduto(idProduto);
 
         produto.enqueue(new Callback<Produto>() {
             @Override
             public void onResponse(Call<Produto> call, Response<Produto> response) {
                 if(response.isSuccessful()){
-                    response.body().getImagem();
-                    response.body().getNomeProduto();
-                    response.body().getPrecProduto();
-                    response.body().getDescProduto();
+                    thisProd = response.body();
+                    nameProductDetatils.setText(thisProd.getNomeProduto());
+                    precoProdutoDetails.setText("R$ "+thisProd.getPrecProduto());
+                    descriptionProductDetails.setText(thisProd.getDescProduto());
                 }
             }
 
             @Override
             public void onFailure(Call<Produto> call, Throwable t) {
                 showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
+                t.printStackTrace();
             }
         });
 

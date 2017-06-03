@@ -1,5 +1,7 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import java.io.Serializable;
+
 /**
  * Created by tobias.vponce on 24/05/2017.
  */

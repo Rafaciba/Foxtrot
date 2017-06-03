@@ -15,58 +15,61 @@
         android:layout_height="99dp">
 
 
+        <ImageView
+            android:id="@+id/imgProdutoCarrinho"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_weight="0.09"
+            app:srcCompat="@mipmap/ic_launcher" />
 
-            <ImageView
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
-                android:id="@+id/imgProdutoCarrinho"
-                android:layout_weight="0.33"
-                android:layout_width="77dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_gravity="center"
+            <TextView
+                android:id="@+id/NomeProdutoCarrinho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_alignTop="@+id/imgProdutoCarrinho"
+                android:layout_gravity="left"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_toEndOf="@+id/imgProdutoCarrinho"
+                android:maxWidth="180dp"
+                android:text="Nome do Produto"
+                android:textSize="14sp"
+                android:textStyle="normal|bold" />
 
-                <TextView
-                    android:text="Nome do Produto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="1dp"
-                    android:id="@+id/NomeProdutoCarrinho"
-                    android:textSize="24sp"
-                    android:layout_alignTop="@+id/imgProdutoCarrinho"
-                    android:layout_toEndOf="@+id/imgProdutoCarrinho"
-                    android:textStyle="normal|bold"
-                    android:layout_gravity="left" />
+            <TextView
+                android:id="@+id/tvDescricaoProduto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imgProdutoCarrinho"
+                android:layout_alignStart="@+id/NomeProdutoCarrinho"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:maxLength="60"
+                android:maxWidth="180dp"
+                android:text="Descrição do Produto"
+                android:textSize="10sp" />
 
-                <TextView
-                    android:id="@+id/tvDescricaoProduto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imgProdutoCarrinho"
-                    android:layout_alignStart="@+id/NomeProdutoCarrinho"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:text="Descrição do Produto" />
-
-            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvPrecoProduto"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_gravity="center"
-            android:layout_weight="0.33"
+            android:layout_weight="0.11"
             android:gravity="center"
             android:text="Valor"
             android:textColor="@android:color/holo_green_dark"

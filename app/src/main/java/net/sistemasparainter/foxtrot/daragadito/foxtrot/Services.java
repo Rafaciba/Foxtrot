@@ -40,15 +40,15 @@ public interface Services {
         @GET("produto/{idProduto}")
         Call<Produto> getProduto(@Path("idProduto") String idProduto);
 
-        @GET("produto/{idCategoria}")
-        Call<Produto> getProdutoCategoria(@Path("idCategoria") String idCategoria);
+        @GET("produto/categoria/{idCategoria}")
+        Call<ArrayList<Produto>> getProdutoCategoria(@Path("idCategoria") String idCategoria);
 
         @GET("produto/busca/{busca}")
         Call<Produto> getProdutoBusca(@Path("busca") String busca);
 
     // CATEGORIA
         @GET("categoria")
-        Call<Categoria> getCategoria();
+        Call<ArrayList<Categoria>> getCategorias();
 
         @GET("categoria/{idCategoria}")
         Call<Categoria> getCategoria(@Path("idCategoria") String idCategoria);

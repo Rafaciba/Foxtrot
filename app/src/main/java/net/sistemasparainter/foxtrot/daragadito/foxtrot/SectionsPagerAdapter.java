@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,11 +14,28 @@ import java.util.List;
 
 public class SectionsPagerAdapter  extends FragmentStatePagerAdapter {
     List<Fragment> fragmentList = new ArrayList<Fragment>();
+    List<String> tabNames = new ArrayList<String>();
 
-    public SectionsPagerAdapter(FragmentManager fm) {
+    public SectionsPagerAdapter(FragmentManager fm, ArrayList<Categoria> categorias) {
         super(fm);
         //Add tabs
         //fragmentList.add(new Tab1());
+        fragmentList.add(new ProdutosFragment());
+        tabNames.add("Todos");
+
+        if(categorias != null) {
+            for (Categoria c : categorias) {
+                Bundle bundleCat = new Bundle();
+                bundleCat.putInt("categoria", c.getIdCategoria());
+
+                ProdutosFragment pf = new ProdutosFragment();
+                pf.setArguments(bundleCat);
+                fragmentList.add(pf);
+                tabNames.add(c.getNomeCategoria());
+            }
+        }else{
+            System.out.println("CATEGORIA VEIO NULO!");
+        }
 
     }
 
@@ -33,6 +51,6 @@ public class SectionsPagerAdapter  extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Tab " + position;
+        return tabNames.get(position);
     }
 }

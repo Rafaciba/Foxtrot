@@ -27,6 +27,6 @@ public class ItemCarrinho {
     }
 
     public void incQuantidade(){
-        this.quantidade ++;
+        this.quantidade++;
     }
 }

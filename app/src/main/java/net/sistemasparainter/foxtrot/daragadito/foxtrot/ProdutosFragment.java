@@ -1,7 +1,9 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -31,11 +33,19 @@ public class ProdutosFragment extends Fragment {
     private ViewGroup linearContainer;
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private ArrayList<Produto> produtosArrayList = null;
+    private int idCategoria = 0;
 
     public ProdutosFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments() != null) {
+            idCategoria = getArguments().getInt("categoria", 0);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +57,7 @@ public class ProdutosFragment extends Fragment {
 
         linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearContainer);
 
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+        //imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
@@ -56,7 +66,13 @@ public class ProdutosFragment extends Fragment {
 
         Services service = retrofit.create(Services.class);
 
-        Call<ArrayList<Produto>> produtos = service.getProdutos();
+        Call<ArrayList<Produto>> produtos;
+
+        if((idCategoria != 0)) {
+            produtos = service.getProdutoCategoria("" + idCategoria);
+        }else{
+            produtos = service.getProdutos();
+        }
 
         try {
             produtos.enqueue(new Callback<ArrayList<Produto>>() {
@@ -64,8 +80,10 @@ public class ProdutosFragment extends Fragment {
                 public void onResponse(Call<ArrayList<Produto>> call, Response<ArrayList<Produto>> response) {
                     produtosArrayList = response.body();
 
-                    for(Produto p : produtosArrayList){
-                        addCardView(p, li);
+                    if(produtosArrayList != null) {
+                        for (Produto p : produtosArrayList) {
+                            addCardView(p, li);
+                        }
                     }
                 }
 
@@ -100,17 +118,19 @@ public class ProdutosFragment extends Fragment {
         // Inflate the layout for this fragment
         return fragmentView;
     }
-    private void addCardView(Produto p, LayoutInflater inflater) {
+    private void addCardView(Produto produto, LayoutInflater inflater) {
+
+        final Produto p = produto;
 
         CardView cardView = (CardView) inflater.inflate(R.layout.fragment_produtos_cardview, linearContainer, false);
 
-        try {
+        /*try {
             ImageView verImagem = (ImageView) cardView.findViewById(R.id.imgProdutoCarrinho);
             imageLoader.displayImage("http://10.135.226.19:8080/WSECommerce/rest/imagem/" + p.getIdProduto() + "/50/50", verImagem);
         }
         catch(Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         TextView nomeProduto = (TextView) cardView.findViewById(R.id.NomeProdutoCarrinho);
         nomeProduto.setText(p.getNomeProduto());
@@ -120,6 +140,15 @@ public class ProdutosFragment extends Fragment {
 
         TextView precProduto = (TextView) cardView.findViewById(R.id.tvPrecoProduto);
         precProduto.setText("R$ "+p.getPrecProduto().toString());
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),ProdutoDetalheActivity.class);
+                i.putExtra("idProduto", ""+p.getIdProduto());
+                startActivity(i);
+            }
+        });
 
         linearContainer.addView(cardView);
 

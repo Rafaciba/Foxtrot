@@ -56,8 +56,6 @@ public class PagamentoActivity extends AppCompatActivity {
                 SingletonPedido sp = SingletonPedido.getInstance();
                 sp.setIdTipoPagto(tipoPagto);
 
-                showDialog.showMessage("Pré Finaliza compra","Atenção");
-
                 finalizaCompra();
             }
         });
@@ -89,13 +87,9 @@ public class PagamentoActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful() && response.code() == 201){
-                        showDialog.showMessage("Seu pedido foi enviado para a loja!","Pedido");
                         Intent i = new Intent(PagamentoActivity.this, MainActivity.class);
-                        i.putExtra("fragment", "resumo");
                         showDialog.showMessageAndRedirect("Seu pedido foi enviado para a loja!","Pedido", i);
                     }
-
-                    showDialog.showMessage(""+response.code(),"Code");
                 }
 
                 @Override

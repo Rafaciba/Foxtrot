@@ -125,7 +125,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Categoria> call, Throwable t) {
-                            showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
+                            Intent i = new Intent(ProdutoDetalheActivity.this, MainActivity.class);
+                            showDialog.showMessageAndRedirect("Erro ao consultar o banco de dados","Erro", i);
                             t.printStackTrace();
                         }
                     });
@@ -134,12 +135,13 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Produto> call, Throwable t) {
-                showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
+                Intent i = new Intent(ProdutoDetalheActivity.this, MainActivity.class);
+                showDialog.showMessageAndRedirect("Erro ao consultar o banco de dados","Erro", i);
                 t.printStackTrace();
             }
         });
 
-        Call<String> imagem = service.getImagemProduto(idProduto, 50, 50);
+        /*Call<String> imagem = service.getImagemProduto(idProduto, 50, 50);
 
         imagem.enqueue(new Callback<String>() {
             @Override
@@ -156,7 +158,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                 showDialog.showMessage("Erro ao consultar o banco de dados","Erro");
                 t.printStackTrace();
             }
-        });
+        });*/
 
     }
 }

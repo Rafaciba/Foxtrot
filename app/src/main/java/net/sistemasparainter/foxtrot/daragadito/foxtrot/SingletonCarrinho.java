@@ -24,7 +24,10 @@ public class SingletonCarrinho {
         }
     }
 
-    public void ExcluirCarrinho (int index) { carrinho.remove(index); }
+    public void RemoverItemCarrinho (int index) { carrinho.remove(index); }
+
+    public void LimparCarrinho () { carrinho.clear(); }
+
 
     public BigDecimal TotalCarrinho () {
 

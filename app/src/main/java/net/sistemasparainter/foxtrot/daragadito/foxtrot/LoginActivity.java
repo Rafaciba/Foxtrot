@@ -3,6 +3,7 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.getBoolean("aceito", false)) {
+            Intent intent = new Intent(LoginActivity.this, TermosActivity.class);
+            startActivity(intent);
+            return;
+        }
 
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
         if(prefs.getString("usuario", null) != null){

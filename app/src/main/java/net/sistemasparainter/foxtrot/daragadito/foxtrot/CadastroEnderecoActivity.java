@@ -1,6 +1,8 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_endereco);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if(prefs.getBoolean("aceito", false)) {
+            Intent intent = new Intent(CadastroEnderecoActivity.this, TermosActivity.class);
+            startActivity(intent);
+            return;
+        }
 
         // INSTANCIA DA CLASSE showDialog UTILIZADA PARA FAZER DIÁLOGOS
         final ShowDialog showDialog = new ShowDialog(CadastroEnderecoActivity.this);

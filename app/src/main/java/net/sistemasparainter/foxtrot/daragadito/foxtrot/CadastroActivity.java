@@ -1,6 +1,8 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +34,13 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if(prefs.getBoolean("aceito", false)) {
+            Intent intent = new Intent(CadastroActivity.this, TermosActivity.class);
+            startActivity(intent);
+            return;
+        }
 
         final ShowDialog showDialog = new ShowDialog(CadastroActivity.this);
 

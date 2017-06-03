@@ -31,7 +31,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        linearContainer = (ViewGroup) findViewById(R.id.linearContainer);
+        linearContainer = (ViewGroup) findViewById(R.id.linearContainerCarrinho);
         btProsseguir = (Button) findViewById(R.id.btProsseguir);
 
         if(singletonCarrinho.checaSeCarrinhoVazio()){
@@ -54,7 +54,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             int singletonIndex = 0;
             for(ItemCarrinho ic : singletonCarrinho.getItensCarrinho()) {
                 addCardView(ic, singletonIndex);
-                showDialog.showMessage(ic.getProduto().getNomeProduto(),"teste");
+                //showDialog.showMessage(ic.getProduto().getNomeProduto(),"teste");
                 singletonIndex++;
             }
 

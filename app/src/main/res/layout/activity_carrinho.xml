@@ -24,10 +24,10 @@
             android:layout_marginBottom="80dp">
 
             <LinearLayout
-                android:id="@+id/linearContainer"
+                android:id="@+id/linearContainerCarrinho"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
             </LinearLayout>
         </ScrollView>

@@ -29,8 +29,8 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         SingletonCarrinho singletonCarrinho = SingletonCarrinho.getInstance();
 
-        for(Produto p : singletonCarrinho.getProdutosCarrinho()) {
-            addCardView(p.getNomeProduto(), p.getPrecProduto());
+        for(ItemCarrinho ic : singletonCarrinho.getItensCarrinho()) {
+            addCardView(ic.getProduto().getNomeProduto(), ic.getProduto().getPrecProduto());
         }
     }
 

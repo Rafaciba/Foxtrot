@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 public class CarrinhoActivity extends AppCompatActivity {
 
     protected ViewGroup linearContainer;

@@ -130,7 +130,7 @@ public class ProdutosFragment extends Fragment {
             e.printStackTrace();
         }*/
 
-        TextView nomeProduto = (TextView) cardView.findViewById(R.id.tvTituloItemCarrinho);
+        TextView nomeProduto = (TextView) cardView.findViewById(R.id.nomeProdutoResumo);
         nomeProduto.setText(p.getNomeProduto());
 
         TextView descProduto = (TextView) cardView.findViewById(R.id.tvDescricaoProduto);

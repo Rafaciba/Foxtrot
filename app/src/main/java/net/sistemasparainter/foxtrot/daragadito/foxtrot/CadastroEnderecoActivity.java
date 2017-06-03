@@ -111,9 +111,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                                 if(response.code() == 200){
                                     showDialog.showMessage("Nome já cadastrado...","Erro");
                                 }else if(response.code() == 201){
-                                    Intent i = new Intent(CadastroEnderecoActivity.this, SwitcherActivity.class);
+                                    Intent i = new Intent(CadastroEnderecoActivity.this, PagamentoActivity.class);
 
                                     novoEnderecoCliente.setCliente(cliente);
+
+                                    SingletonPedido sp = SingletonPedido.getInstance();
+                                    sp.setEndereco(novoEnderecoCliente);
+
                                     showDialog.showMessageAndRedirect("Endereço cadastrado com sucesso!","Sucesso", i);
                                 }else if(response.code() == 500){
                                     showDialog.showMessage("Erro ao cadastrar cliente...","Erro");

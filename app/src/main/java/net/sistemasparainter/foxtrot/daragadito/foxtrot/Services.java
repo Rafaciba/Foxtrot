@@ -30,7 +30,7 @@ public interface Services {
         Call<Void> setEndereco(@Body Endereco endereco);
 
         @GET("endereco/{idCliente}")
-        Call<Endereco> getEndereco(@Path("idCliente") String idCliente);
+        Call<ArrayList<Endereco>> getEndereco(@Path("idCliente") String idCliente);
 
 
     // PRODUTOS

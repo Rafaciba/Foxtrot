@@ -32,7 +32,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/NomeProdutoCarrinho"
+                android:id="@+id/nomeProdutoResumo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/imgProdutoCarrinho"
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imgProdutoCarrinho"
-                android:layout_alignStart="@+id/NomeProdutoCarrinho"
+                android:layout_alignStart="@+id/nomeProdutoResumo"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:maxLength="60"

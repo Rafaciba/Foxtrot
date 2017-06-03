@@ -61,4 +61,11 @@ public interface Services {
         @GET("imagem")
         Call<byte[]> getImagemProduto(@Path("param") String imagemId, @Path("width") int IMG_WIDTH, @Path("height") int IMG_HEIGHT);
 
+    //PEDIDO
+        @GET("pedido/{idPedido}")
+        Call<Pedido> getPedido(@Path("idPedido") String idPedido);
+
+        @POST("pedido")
+        Call<Void> createPedido(@Body Pedido pedido);
+
 }

@@ -6,15 +6,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
@@ -37,7 +31,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     private void addCardView(String titulo, BigDecimal valor){
         CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.carrinho_cardview, linearContainer, false);
-        TextView tituloProduto = (TextView) cardView.findViewById(R.id.NomeProdutoCarrinho);
+        TextView tituloProduto = (TextView) cardView.findViewById(R.id.nomeProdutoResumo);
         TextView valorProduto = (TextView) cardView.findViewById(R.id.tvDescricaoProduto);
 
         cardView.setOnClickListener(new View.OnClickListener() {

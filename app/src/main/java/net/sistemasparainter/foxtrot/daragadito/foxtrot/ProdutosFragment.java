@@ -98,25 +98,6 @@ public class ProdutosFragment extends Fragment {
             e.printStackTrace();
         }
 
-        /*if(produtosArrayList != null){
-            for(Produto p : produtosArrayList){
-                addCardView(p, savedInstanceState);
-            }
-        }*/
-
-
-        /*ArrayList<String> urls = new ArrayList<>();
-        //urls.add("http://localhost:8080/WSECommerce/rest/imagem/1/200/200");
-        urls.add("https://riodegraca.files.wordpress.com/2016/07/casa_suica.jpg");
-        urls.add("https://i2.wp.com/oprofessorweb.files.wordpress.com/2017/04/figura-4.jpg");
-
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
-
-        for (int i = 0; i < 2; i++) {
-
-            addCardView(urls.get(i), savedInstanceState);
-        }*/
-
         // Inflate the layout for this fragment
         return fragmentView;
     }

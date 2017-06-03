@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private FloatingActionButton fab;
 
+    ShowDialog showDialog = new ShowDialog(MainActivity.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,22 +87,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Começa com o fragment de categorias inflado
-        Intent i = getIntent();
-        if((i != null) && (i.getStringExtra("fragment") != null)){
-            String pagina = i.getStringExtra("fragment");
-            if(pagina == "resumo"){
-                ResumoCompraFragment fragment = new ResumoCompraFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-            }
-
-        }else{
-            CategoriasFragment fragment = new CategoriasFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-        }
-
         CategoriasFragment fragment = new CategoriasFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-
     }
 
     @Override

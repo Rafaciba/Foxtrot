@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -101,7 +103,11 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     thisProd = response.body();
                     nameProductDetatils.setText(thisProd.getNomeProduto());
-                    precoProdutoDetails.setText("R$ "+thisProd.getPrecProduto());
+                    if(thisProd.getDescontoPromocao() != BigDecimal.ZERO){
+                        precoProdutoDetails.setText("De R$ "+thisProd.getPrecProduto()+"\nPor R$ "+thisProd.getPrecProduto().subtract(thisProd.getDescontoPromocao()));
+                    }else {
+                        precoProdutoDetails.setText("R$ " + thisProd.getPrecProduto());
+                    }
                     descriptionProductDetails.setText(thisProd.getDescProduto());
 
                     Retrofit retrofit = new Retrofit.Builder()

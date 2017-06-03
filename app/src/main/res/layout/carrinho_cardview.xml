@@ -18,7 +18,7 @@
 
         <ImageView
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@android:drawable/ic_menu_gallery"
             android:id="@+id/imgProdutoCarrinho"
             android:layout_weight="0.33"
             android:layout_width="77dp"

@@ -143,7 +143,7 @@ public class ProdutosFragment extends Fragment {
         descProduto.setText(p.getDescProduto());
 
         TextView precProduto = (TextView) cardView.findViewById(R.id.tvPrecoProduto);
-        precProduto.setText("R$ "+p.getPrecProduto().toString());
+        precProduto.setText("R$ "+p.getPrecProduto().floatValue());
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override

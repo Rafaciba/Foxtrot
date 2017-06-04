@@ -27,7 +27,7 @@ public interface Services {
 
     // ENDEREÇO
         @POST("endereco")
-        Call<Void> setEndereco(@Body Endereco endereco);
+        Call<Long> setEndereco(@Body Endereco endereco);
 
         @GET("endereco/{idCliente}")
         Call<ArrayList<Endereco>> getEndereco(@Path("idCliente") String idCliente);

@@ -27,7 +27,7 @@ public class TermosActivity extends AppCompatActivity {
 
         Boolean aceito = preference.getBoolean("aceito", false);
         if(aceito){
-            Intent intent = new Intent(TermosActivity.this, LoginActivity.class);
+            Intent intent = new Intent(TermosActivity.this, MainActivity.class);
             startActivity(intent);
         }
 
@@ -37,13 +37,8 @@ public class TermosActivity extends AppCompatActivity {
             @Override
             
             public void onClick(View v) {
-
                 ShowDialog sd = new ShowDialog(TermosActivity.this);
-                    sd.showMessage("O aceite é obrigatório para utilização do nosso App", "Atenção");
-
-
-
-
+                sd.showMessage("O aceite é obrigatório para utilização do nosso Aplicativo", "Atenção");
             }
         });
 

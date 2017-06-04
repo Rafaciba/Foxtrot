@@ -88,6 +88,7 @@ public class PagamentoActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if(response.isSuccessful() && response.code() == 201){
                         Intent i = new Intent(PagamentoActivity.this, MainActivity.class);
+                        i.putExtra("fragment", "resumo");
                         showDialog.showMessageAndRedirect("Seu pedido foi enviado para a loja!","Pedido", i);
                     }
                 }

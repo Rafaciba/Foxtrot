@@ -5,8 +5,6 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
  */
 
 public class Endereco {
-
-    Cliente cliente;
     private int idEndereco;
     private int idCliente;
     private String nomeEndereco;
@@ -65,8 +63,6 @@ public class Endereco {
 
     public String getUFEndereco() {return ufEndereco;}
 
-    public Cliente getCliente() {return cliente;}
-
 
     // SETTERS
     public void setIdEndereco(int idEndereco) {
@@ -107,9 +103,5 @@ public class Endereco {
 
     public void setUFEndereco(String UFEndereco) {
         this.ufEndereco = UFEndereco;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 }

@@ -13,7 +13,7 @@
         <item
             android:id="@+id/nav_status_login"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/cliente_deslogado"/>
+            android:title="@string/cliente_logado"/>
     </group>
 
     <!--<item android:title="Communicate">-->

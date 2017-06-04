@@ -68,11 +68,11 @@ public class CarrinhoActivity extends AppCompatActivity {
             btProsseguir.setText("Fianlizar compra");
 
             // CRIA UM CARDVIEW PARA CADA ITEM DO CARRINHO
-            int singletonIndex = 0;
             for(ItemCarrinho ic : singletonCarrinho.getItensCarrinho()) {
-                addCardView(ic, singletonIndex);
-                singletonIndex++;
+                addCardView(ic);
             }
+
+            tvTotal.setText("Total: R$ "+singletonCarrinho.TotalCarrinho().floatValue());
 
             // AÇÃO DO BOTÃO
             btProsseguir.setOnClickListener(new View.OnClickListener() {
@@ -80,42 +80,48 @@ public class CarrinhoActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent i;
 
-                    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-                    if(prefs.getString("usuario", null) != null){
+                    SingletonCliente singletonCliente = SingletonCliente.getInstance();
 
-                        try {
-                            JSONObject json = new JSONObject(prefs.getString("usuario", null));
-                            Cliente u = new Cliente(json.getInt("idCliente"),
-                                    json.getString("nomeCompletoCliente"),
-                                    json.getString("emailCliente"),
-                                    json.getString("senhaCliente"),
-                                    json.getString("CPFCliente"),
-                                    json.getString("celularCliente"),
-                                    json.getString("telComercialCliente"),
-                                    json.getString("telResidencialCliente"),
-                                    json.getString("dtNascCliente"),
-                                    json.getInt("recebeNewsLetter"));
+                    if(singletonCliente.estaLogado()) {
+                        i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
+                    } else {
 
-                            SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
-                            singletonClienteLogado.setClienteLogado(u);
+                        SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                        System.out.println("CLIENTE: "+prefs.getString("usuario", "nenhum"));
+                        if (prefs.getString("usuario", null) != null) {
 
-                            showDialog.showMessage("Logado: "+singletonClienteLogado.getClienteLogado().getIdCliente(),"Login");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            showDialog.showMessage("Erro ao recuperar seu login.\nPor favor entre com seus dados novamente.","Erro");
-                        }
-                    }else {
+                            try {
+                                JSONObject json = new JSONObject(prefs.getString("usuario", null));
+                                Cliente u = new Cliente(json.getInt("idCliente"),
+                                        json.getString("nomeCompletoCliente"),
+                                        json.getString("emailCliente"),
+                                        json.getString("senhaCliente"),
+                                        json.getString("CPFCliente"),
+                                        json.getString("celularCliente"),
+                                        json.getString("telComercialCliente"),
+                                        json.getString("telResidencialCliente"),
+                                        json.getString("dtNascCliente"),
+                                        json.getInt("recebeNewsLetter"));
 
-                        SingletonCliente singletonCliente = SingletonCliente.getInstance();
+                                singletonCliente = SingletonCliente.getInstance();
+                                singletonCliente.setClienteLogado(u);
 
-                        if (singletonCliente.estaLogado()) {
-                            i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
+                                showDialog.showMessage("Logado: " + singletonCliente.getClienteLogado().getIdCliente(), "Login");
+
+                                i = new Intent(CarrinhoActivity.this, EnderecosActivity.class);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                i = new Intent(CarrinhoActivity.this, LoginActivity.class);
+                                i.putExtra("compra","comprando");
+                                showDialog.showMessageAndRedirect("Erro ao recuperar seu login.\nPor favor entre com seus dados novamente.", "Erro", i);
+                            }
                         } else {
                             i = new Intent(CarrinhoActivity.this, LoginActivity.class);
+                            i.putExtra("compra","comprando");
                         }
-
-                        startActivity(i);
                     }
+
+                    startActivity(i);
                 }
             });
         }
@@ -123,11 +129,10 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
 
     // FUNÇÃO PARA CRIAR CARDVIEWS DE PRODUTOS
-    private void addCardView(ItemCarrinho p, int index){
+    private void addCardView(final ItemCarrinho p){
         CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.carrinho_cardview, linearContainer, false);
 
         final ItemCarrinho itemCarrinho = p;
-        final int singletonIndex= index;
 
         ImageView imgItemCarrinho = (ImageView) cardView.findViewById(R.id.imgItemCarrinho);
         ImageView removeItemCarrinho = (ImageView) cardView.findViewById(R.id.removeItemCarrinho);
@@ -137,17 +142,14 @@ public class CarrinhoActivity extends AppCompatActivity {
         Button incItemCarrinho = (Button) cardView.findViewById(R.id.incItemCarrinho);
         Button decItemCarrinho = (Button) cardView.findViewById(R.id.decItemCarrinho);
 
-//        ImageLoader imageLoader = ImageLoader.getInstance();
-//        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-//        imageLoader.displayImage(url, imagem);
-
         decItemCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!tvQtItemCarrinho.getText().toString().equals("1")){
                     int qtItemCarrinho = Integer.parseInt(tvQtItemCarrinho.getText().toString())-1;
                     tvQtItemCarrinho.setText(String.valueOf(qtItemCarrinho ));
-                    singletonCarrinho.decrementItemCarrinho(singletonIndex);
+                    singletonCarrinho.decrementItemCarrinho(p);
+                    tvTotal.setText("Total: R$ "+singletonCarrinho.TotalCarrinho().floatValue());
                 }
             }
         });
@@ -158,7 +160,8 @@ public class CarrinhoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int qtItemCarrinho = Integer.parseInt(tvQtItemCarrinho.getText().toString())+1;
                 tvQtItemCarrinho.setText(String.valueOf(qtItemCarrinho ));
-                singletonCarrinho.incrementItemCarrinho(singletonIndex);
+                singletonCarrinho.incrementItemCarrinho(p);
+                tvTotal.setText("Total: R$ "+singletonCarrinho.TotalCarrinho().floatValue());
             }
         });
 
@@ -166,8 +169,9 @@ public class CarrinhoActivity extends AppCompatActivity {
         removeItemCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                singletonCarrinho.RemoverItemCarrinho(singletonIndex);
-                linearContainer.removeViewAt(singletonIndex);
+                linearContainer.removeViewAt(singletonCarrinho.getItensCarrinho().indexOf(p));
+                singletonCarrinho.RemoverItemCarrinho(p);
+                tvTotal.setText("Total: R$ "+singletonCarrinho.TotalCarrinho().floatValue());
             }
         });
 
@@ -182,7 +186,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         });
 
         tvTituloItemCarrinho.setText(itemCarrinho.getProduto().getNomeProduto());
-        tvValorItemCarrinho.setText(itemCarrinho.getProduto().getPrecProduto().toString());
+        tvValorItemCarrinho.setText("R$ "+itemCarrinho.getProduto().getPrecProduto().floatValue());
         tvQtItemCarrinho.setText(String.valueOf(itemCarrinho.getQuantidade()));
 
         linearContainer.addView(cardView);

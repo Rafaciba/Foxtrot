@@ -98,13 +98,13 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
 
                     Services service = retrofit.create(Services.class);
 
-                    Call<Void> respostaServico = service.setEndereco(novoEnderecoCliente);
+                    Call<Long> respostaServico = service.setEndereco(novoEnderecoCliente);
 
 
                     // TRATAMENTO DA RESPOTA DO SERVIÇO
-                    respostaServico.enqueue(new Callback<Void>() {
+                    respostaServico.enqueue(new Callback<Long>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(Call<Long> call, Response<Long> response) {
 
 
                             if(response.isSuccessful()){
@@ -113,7 +113,7 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                                 }else if(response.code() == 201){
                                     Intent i = new Intent(CadastroEnderecoActivity.this, PagamentoActivity.class);
 
-                                    novoEnderecoCliente.setCliente(cliente);
+                                    novoEnderecoCliente.setIdEndereco(response.body().intValue());
 
                                     SingletonPedido sp = SingletonPedido.getInstance();
                                     sp.setEndereco(novoEnderecoCliente);
@@ -129,12 +129,11 @@ public class CadastroEnderecoActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(Call<Long> call, Throwable t) {
 
                             showDialog.showMessage("Erro ao cadastrar endereço...","Erro");
                         }
                     });
-                    respostaServico.execute();
 
 
                 }catch(Exception e){

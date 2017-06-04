@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ResumoCompraFragment extends Fragment {
 
     private ViewGroup linearContainer;
+    private TextView tvTotalResumo;
 
     public ResumoCompraFragment(){
 
@@ -23,11 +24,13 @@ public class ResumoCompraFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragmentView = inflater.inflate(R.layout.fragment_produtos, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_resumo_compra, container, false);
 
         final LayoutInflater li = inflater;
 
         linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearResumoContainer);
+
+        tvTotalResumo = (TextView) fragmentView.findViewById(R.id.tvTotalResumo);
 
         SingletonCarrinho sc = SingletonCarrinho.getInstance();
         ArrayList<ItemCarrinho> carrinho = sc.getItensCarrinho();
@@ -35,6 +38,8 @@ public class ResumoCompraFragment extends Fragment {
         for(ItemCarrinho ic : carrinho){
             addCardView(ic, li);
         }
+
+        tvTotalResumo.setText("R$ "+sc.TotalCarrinho().floatValue());
 
         sc.LimparCarrinho();
 
@@ -54,7 +59,7 @@ public class ResumoCompraFragment extends Fragment {
         descProduto.setText(item.getProduto().getDescProduto());
 
         TextView precProduto = (TextView) cardView.findViewById(R.id.precoProdutoResumo);
-        precProduto.setText("R$ "+item.getProduto().getPrecProduto().toString());
+        precProduto.setText("R$ "+item.getProduto().getPrecProduto().floatValue());
 
         TextView qtdProduto = (TextView) cardView.findViewById(R.id.qtdProdutoResumo);
         qtdProduto.setText(item.getQuantidade()+" unidade(s)");

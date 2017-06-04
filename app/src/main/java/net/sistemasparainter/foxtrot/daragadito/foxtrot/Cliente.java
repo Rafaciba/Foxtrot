@@ -10,37 +10,37 @@ public class Cliente {
     private String nomeCompletoCliente;
     private String emailCliente;
     private String senhaCliente;
-    private String CPFCliente;
+    private String cpfCliente;
     private String celularCliente;
     private String telComercialCliente;
-    private String telResindencialCliente;
+    private String telResidencialCliente;
     private String dtNascCliente;
     private int recebeNewsLetter;
 
-    public Cliente(int idCliente, String nomeCompletoCliente, String emailCliente, String senhaCliente, String CPFCliente, String celularCliente,
-                   String telComercialCliente, String telResindencialCliente, String dtNascCliente, int recebeNewsLetter) {
+    public Cliente(int idCliente, String nomeCompletoCliente, String emailCliente, String senhaCliente, String cpfCliente, String celularCliente,
+                   String telComercialCliente, String telResidencialCliente, String dtNascCliente, int recebeNewsLetter) {
         this.idCliente = idCliente;
         this.nomeCompletoCliente = nomeCompletoCliente;
         this.emailCliente = emailCliente;
         this.senhaCliente = senhaCliente;
-        this.CPFCliente = CPFCliente;
+        this.cpfCliente = cpfCliente;
         this.celularCliente = celularCliente;
         this.telComercialCliente = telComercialCliente;
-        this.telResindencialCliente = telResindencialCliente;
+        this.telResidencialCliente = telResidencialCliente;
         this.dtNascCliente = dtNascCliente;
         this.recebeNewsLetter = recebeNewsLetter;
     }
 
 
-    public Cliente(String nomeCompletoCliente, String emailCliente, String senhaCliente, String CPFCliente, String celularCliente,
-                   String telComercialCliente, String telResindencialCliente, String dtNascCliente, int recebeNewsLetter) {
+    public Cliente(String nomeCompletoCliente, String emailCliente, String senhaCliente, String cpfCliente, String celularCliente,
+                   String telComercialCliente, String telResidencialCliente, String dtNascCliente, int recebeNewsLetter) {
         this.nomeCompletoCliente = nomeCompletoCliente;
         this.emailCliente = emailCliente;
         this.senhaCliente = senhaCliente;
-        this.CPFCliente = CPFCliente;
+        this.cpfCliente = cpfCliente;
         this.celularCliente = celularCliente;
         this.telComercialCliente = telComercialCliente;
-        this.telResindencialCliente = telResindencialCliente;
+        this.telResidencialCliente = telResidencialCliente;
         this.dtNascCliente = dtNascCliente;
         this.recebeNewsLetter = recebeNewsLetter;
     }
@@ -62,8 +62,8 @@ public class Cliente {
         return senhaCliente;
     }
 
-    public String getCPFCliente() {
-        return CPFCliente;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
     public String getCelularCliente() {
@@ -74,8 +74,8 @@ public class Cliente {
         return telComercialCliente;
     }
 
-    public String getTelResindencialCliente() {
-        return telResindencialCliente;
+    public String getTelResidencialCliente() {
+        return telResidencialCliente;
     }
 
     public String getDtNascCliente() {

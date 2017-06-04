@@ -104,9 +104,9 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                     thisProd = response.body();
                     nameProductDetatils.setText(thisProd.getNomeProduto());
                     if(thisProd.getDescontoPromocao() != BigDecimal.ZERO){
-                        precoProdutoDetails.setText("De R$ "+thisProd.getPrecProduto()+"\nPor R$ "+thisProd.getPrecProduto().subtract(thisProd.getDescontoPromocao()));
+                        precoProdutoDetails.setText("De R$ "+thisProd.getPrecProduto().floatValue()+"\nPor R$ "+thisProd.getPrecProduto().subtract(thisProd.getDescontoPromocao()).floatValue());
                     }else {
-                        precoProdutoDetails.setText("R$ " + thisProd.getPrecProduto());
+                        precoProdutoDetails.setText("R$ " + thisProd.getPrecProduto().floatValue());
                     }
                     descriptionProductDetails.setText(thisProd.getDescProduto());
 

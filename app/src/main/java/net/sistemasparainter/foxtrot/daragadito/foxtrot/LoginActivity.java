@@ -14,8 +14,6 @@ import android.widget.EditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+
         if(prefs.getString("usuario", null) != null){
 
             try {
@@ -118,10 +117,10 @@ public class LoginActivity extends AppCompatActivity {
                                 clienteJson.put("nomeCompletoCliente", usuarioLogado.getNomeCompletoCliente());
                                 clienteJson.put("emailCliente", usuarioLogado.getEmailCliente());
                                 clienteJson.put("senhaCliente", usuarioLogado.getSenhaCliente());
-                                clienteJson.put("CPFCliente", usuarioLogado.getCPFCliente());
+                                clienteJson.put("CPFCliente", usuarioLogado.getCpfCliente());
                                 clienteJson.put("celularCliente", usuarioLogado.getCelularCliente());
                                 clienteJson.put("telComercialCliente", usuarioLogado.getTelComercialCliente());
-                                clienteJson.put("telResidencialCliente", usuarioLogado.getTelResindencialCliente());
+                                clienteJson.put("telResidencialCliente", usuarioLogado.getTelResidencialCliente());
                                 clienteJson.put("dtNascCliente", usuarioLogado.getDtNascCliente());
                                 clienteJson.put("recebeNewsLetter", usuarioLogado.getRecebeNewsLetter());
                             } catch (JSONException e) {
@@ -129,10 +128,10 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             if(cbManterLogado.isChecked()) {
-                                //TODO sharedPreferences Login
                                 SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
                                 SharedPreferences.Editor sharedEditor = prefs.edit();
                                 sharedEditor.putString("usuario", clienteJson.toString());
+                                sharedEditor.apply();
                             }
 
                             SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
@@ -140,8 +139,15 @@ public class LoginActivity extends AppCompatActivity {
 
                             progress.dismiss();
 
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(i);
+                            Intent i = getIntent();
+                            Intent destino;
+                            if((i != null) && (i.getStringExtra("compra") != null)){
+                                destino = new Intent(LoginActivity.this, EnderecosActivity.class);
+                            }else{
+                                destino = new Intent(LoginActivity.this, MainActivity.class);
+                            }
+
+                            startActivity(destino);
                         }
 
                         @Override

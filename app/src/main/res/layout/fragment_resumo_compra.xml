@@ -22,7 +22,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="445dp">
+            android:layout_height="427dp">
 
             <LinearLayout
                 android:id="@+id/linearResumoContainer"

@@ -32,7 +32,7 @@ public class SingletonCarrinho {
     }
 
     // REMOVE UM ITEM DO CARRINHO
-    public void RemoverItemCarrinho (int index) { carrinho.remove(index); }
+    public void RemoverItemCarrinho (ItemCarrinho ic) { carrinho.remove(carrinho.indexOf(ic)); }
 
     // REMOVE TODOS OS ITENS DO CARRINHO
     public void LimparCarrinho () { carrinho.clear(); }
@@ -40,11 +40,12 @@ public class SingletonCarrinho {
     // RETORNA O TOTAL DO CARRINHO (VALOR)
     public BigDecimal TotalCarrinho () {
 
-        BigDecimal total = BigDecimal.valueOf(0);
+        BigDecimal total = BigDecimal.ZERO;
 
         for(ItemCarrinho ic : carrinho) {
-            System.out.println(ic.getQuantidade());
-            total.add(ic.getProduto().getPrecProduto().multiply(BigDecimal.valueOf(ic.getQuantidade())));
+            BigDecimal preco = ic.getProduto().getPrecProduto();
+            BigDecimal qtd = BigDecimal.valueOf(ic.getQuantidade());
+            total = total.add(preco.multiply(qtd));
         }
 
         return total;
@@ -76,12 +77,12 @@ public class SingletonCarrinho {
     }
 
 
-    public void incrementItemCarrinho(int index){
-        carrinho.get(index).incQuantidade();
+    public void incrementItemCarrinho(ItemCarrinho ic){
+        carrinho.get(carrinho.indexOf(ic)).incQuantidade();
     }
 
-    public void decrementItemCarrinho(int index){
-        carrinho.get(index).decQuantidade();
+    public void decrementItemCarrinho(ItemCarrinho ic){
+        carrinho.get(carrinho.indexOf(ic)).decQuantidade();
     }
 
 }

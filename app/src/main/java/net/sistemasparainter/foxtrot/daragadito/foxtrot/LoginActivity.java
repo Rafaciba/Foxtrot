@@ -3,6 +3,8 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usuario;
     private EditText senha;
     private Button btnLogin;
+    private Button btnCadastro;
     private CheckBox cbManterLogado;
     ShowDialog sd = new ShowDialog(LoginActivity.this);
     private Cliente usuarioLogado;
@@ -75,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.etUsuario);
         senha = (EditText) findViewById(R.id.etCEP);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnCadastro = (Button) findViewById(R.id.btnCadastro);
         cbManterLogado = (CheckBox) findViewById(R.id.cbManterLogado);
 
         Intent userInfos = getIntent();
@@ -108,60 +112,78 @@ public class LoginActivity extends AppCompatActivity {
                     respostaCliente.enqueue(new Callback<Cliente>() {
                         @Override
                         public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                            if (response.code() == 200) {
+                                usuarioLogado = response.body();
 
-                            usuarioLogado = response.body();
+                                JSONObject clienteJson = new JSONObject();
+                                try {
+                                    clienteJson.put("idCliente", usuarioLogado.getIdCliente());
+                                    clienteJson.put("nomeCompletoCliente", usuarioLogado.getNomeCompletoCliente());
+                                    clienteJson.put("emailCliente", usuarioLogado.getEmailCliente());
+                                    clienteJson.put("senhaCliente", usuarioLogado.getSenhaCliente());
+                                    clienteJson.put("CPFCliente", usuarioLogado.getCpfCliente());
+                                    clienteJson.put("celularCliente", usuarioLogado.getCelularCliente());
+                                    clienteJson.put("telComercialCliente", usuarioLogado.getTelComercialCliente());
+                                    clienteJson.put("telResidencialCliente", usuarioLogado.getTelResidencialCliente());
+                                    clienteJson.put("dtNascCliente", usuarioLogado.getDtNascCliente());
+                                    clienteJson.put("recebeNewsLetter", usuarioLogado.getRecebeNewsLetter());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                            JSONObject clienteJson = new JSONObject();
-                            try {
-                                clienteJson.put("idCliente", usuarioLogado.getIdCliente());
-                                clienteJson.put("nomeCompletoCliente", usuarioLogado.getNomeCompletoCliente());
-                                clienteJson.put("emailCliente", usuarioLogado.getEmailCliente());
-                                clienteJson.put("senhaCliente", usuarioLogado.getSenhaCliente());
-                                clienteJson.put("CPFCliente", usuarioLogado.getCpfCliente());
-                                clienteJson.put("celularCliente", usuarioLogado.getCelularCliente());
-                                clienteJson.put("telComercialCliente", usuarioLogado.getTelComercialCliente());
-                                clienteJson.put("telResidencialCliente", usuarioLogado.getTelResidencialCliente());
-                                clienteJson.put("dtNascCliente", usuarioLogado.getDtNascCliente());
-                                clienteJson.put("recebeNewsLetter", usuarioLogado.getRecebeNewsLetter());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                                if (cbManterLogado.isChecked()) {
+                                    SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
+                                    SharedPreferences.Editor sharedEditor = prefs.edit();
+                                    sharedEditor.putString("usuario", clienteJson.toString());
+                                    sharedEditor.apply();
+                                }
 
-                            if(cbManterLogado.isChecked()) {
-                                SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-                                SharedPreferences.Editor sharedEditor = prefs.edit();
-                                sharedEditor.putString("usuario", clienteJson.toString());
-                                sharedEditor.apply();
-                            }
+                                SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
+                                singletonClienteLogado.setClienteLogado(usuarioLogado);
 
-                            SingletonCliente singletonClienteLogado = SingletonCliente.getInstance();
-                            singletonClienteLogado.setClienteLogado(usuarioLogado);
+                                progress.dismiss();
 
-                            progress.dismiss();
+                                Intent i = getIntent();
+                                Intent destino;
+                                if ((i != null) && (i.getStringExtra("compra") != null)) {
+                                    destino = new Intent(LoginActivity.this, EnderecosActivity.class);
+                                } else {
+                                    destino = new Intent(LoginActivity.this, MainActivity.class);
+                                }
 
-                            Intent i = getIntent();
-                            Intent destino;
-                            if((i != null) && (i.getStringExtra("compra") != null)){
-                                destino = new Intent(LoginActivity.this, EnderecosActivity.class);
+                                startActivity(destino);
+                            }else if (response.code() == 404) {
+                                sd.showMessage("Usuário ou senha inválidos","Login inválido");
                             }else{
-                                destino = new Intent(LoginActivity.this, MainActivity.class);
+                                sd.showMessage("Ocorreu um erro inesperado! Verifique sua conexão com a internet.","Erro");
                             }
-
-                            startActivity(destino);
                         }
 
                         @Override
                         public void onFailure(Call<Cliente> call, Throwable t) {
                             progress.dismiss();
-                            sd.showMessage("Usuário ou senha inválidos","Erro");
+                            sd.showMessage("Ocorreu um erro inesperado! Verifique sua conexão com a internet.","Erro");
                         }
                     });
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    sd.showMessage("Erro de login","Erro");
+                    sd.showMessage("Ocorreu um erro inesperado! Verifique sua conexão com a internet.","Erro");
                 }
             }
         });
+
+        btnCadastro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, CadastroActivity.class);
+                startActivity(i);
+            }
+        });
+
+        if(NetworkUtil.getConnectivityStatus(LoginActivity.this) == 0){
+            ShowDialog sd = new ShowDialog(LoginActivity.this);
+            sd.showConnectionMessage();
+        }
     }
 }

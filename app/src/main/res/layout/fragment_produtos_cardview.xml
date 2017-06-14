@@ -15,16 +15,6 @@
         android:layout_height="99dp">
 
 
-        <ImageView
-            android:id="@+id/imgItemCarrinho"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_weight="0.09"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="wrap_content"
@@ -35,13 +25,13 @@
                 android:id="@+id/nomeProdutoResumo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imgItemCarrinho"
+                android:layout_alignTop="@+id/imgListaProdutos"
                 android:layout_gravity="left"
                 android:layout_marginBottom="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/imgItemCarrinho"
+                android:layout_toEndOf="@+id/imgListaProdutos"
                 android:maxWidth="180dp"
                 android:text="Nome do Produto"
                 android:textSize="14sp"
@@ -51,7 +41,7 @@
                 android:id="@+id/tvDescricaoProduto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imgItemCarrinho"
+                android:layout_alignBottom="@+id/imgListaProdutos"
                 android:layout_alignStart="@+id/tvTituloItemCarrinho"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
@@ -64,7 +54,7 @@
 
         <TextView
             android:id="@+id/tvPrecoProduto"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"

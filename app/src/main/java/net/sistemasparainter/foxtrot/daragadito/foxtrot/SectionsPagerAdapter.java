@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +20,6 @@ public class SectionsPagerAdapter  extends FragmentStatePagerAdapter {
     public SectionsPagerAdapter(FragmentManager fm, ArrayList<Categoria> categorias) {
         super(fm);
         //Add tabs
-        //fragmentList.add(new Tab1());
         fragmentList.add(new ProdutosFragment());
         tabNames.add("Todos");
 
@@ -33,8 +33,6 @@ public class SectionsPagerAdapter  extends FragmentStatePagerAdapter {
                 fragmentList.add(pf);
                 tabNames.add(c.getNomeCategoria());
             }
-        }else{
-            System.out.println("CATEGORIA VEIO NULO!");
         }
 
     }

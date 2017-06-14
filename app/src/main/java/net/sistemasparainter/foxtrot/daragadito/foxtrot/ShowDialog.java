@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -11,9 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class ShowDialog {
 
-    private AppCompatActivity atividade;
+    private Context atividade;
 
-    public ShowDialog (AppCompatActivity atividade){
+    public ShowDialog (Context atividade){
         this.atividade = atividade;
     }
 
@@ -39,6 +40,26 @@ public class ShowDialog {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 atividade.startActivity(i);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showConnectionMessage(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(atividade);
+        builder.setMessage("Verifique sua conexão com a internet e tente novamente.");
+        builder.setTitle("Falha de conexão");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Tentar novamente", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if(NetworkUtil.getConnectivityStatus(atividade) == 0){
+                    showConnectionMessage();
+                }else{
+                    Intent i = new Intent(atividade,MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    atividade.startActivity(i);
+                }
             }
         });
         AlertDialog dialog = builder.create();

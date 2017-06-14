@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -150,18 +152,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent i = getIntent();
-        if((i != null) && (i.getStringExtra("fragment") != null)){
-            String pagina = i.getStringExtra("fragment");
-            if(pagina.equals("resumo")){
-                ResumoCompraFragment fragment = new ResumoCompraFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
-            }
-
-        }else{
-            CategoriasFragment fragment = new CategoriasFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+        if(NetworkUtil.getConnectivityStatus(MainActivity.this) == 0){
+            ShowDialog sd = new ShowDialog(MainActivity.this);
+            sd.showConnectionMessage();
         }
+
+        Fragment fragment;
+        Intent i = getIntent();
+        if((i != null) && ((i.getStringExtra("fragment") != null) || (i.getStringExtra("busca") != null))){
+            if(i.getStringExtra("fragment") != null) {
+                String pagina = i.getStringExtra("fragment");
+                if (pagina.equals("resumo")) {
+                    fragment = new ResumoCompraFragment();
+                } else {
+                    fragment = new CategoriasFragment();
+                }
+            }else if (i.getStringExtra("busca") != null){
+                Bundle bundleBusca = new Bundle();
+                bundleBusca.putString("busca", i.getStringExtra("busca"));
+
+                fragment = new BuscaFragment();
+                fragment.setArguments(bundleBusca);
+            }else{
+                fragment = new CategoriasFragment();
+            }
+        }else{
+            fragment = new CategoriasFragment();
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
     }
 
     @Override
@@ -206,9 +225,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-                /*Intent i = new Intent(MainActivity.this, MainActivity.class);
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("busca",s);
-                startActivity(i);*/
+                startActivity(i);
                 return false;
             }
 

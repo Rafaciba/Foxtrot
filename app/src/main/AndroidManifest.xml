@@ -12,6 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver
+            android:name="net.sistemasparainter.foxtrot.daragadito.foxtrot.NetworkChangeReceiver"
+            android:label="NetworkChangeReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".SwitcherActivity">

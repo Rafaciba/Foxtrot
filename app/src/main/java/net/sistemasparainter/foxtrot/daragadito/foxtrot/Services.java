@@ -44,7 +44,7 @@ public interface Services {
         Call<ArrayList<Produto>> getProdutoCategoria(@Path("idCategoria") String idCategoria);
 
         @GET("produto/busca/{busca}")
-        Call<Produto> getProdutoBusca(@Path("busca") String busca);
+        Call<ArrayList<Produto>> getProdutoBusca(@Path("busca") String busca);
 
     // CATEGORIA
         @GET("categoria")

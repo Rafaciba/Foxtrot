@@ -103,7 +103,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     thisProd = response.body();
                     nameProductDetatils.setText(thisProd.getNomeProduto());
-                    if(thisProd.getDescontoPromocao() != BigDecimal.ZERO){
+                    if(thisProd.getDescontoPromocao().compareTo(BigDecimal.ZERO) != 0){
                         precoProdutoDetails.setText("De R$ "+thisProd.getPrecProduto().floatValue()+"\nPor R$ "+thisProd.getPrecProduto().subtract(thisProd.getDescontoPromocao()).floatValue());
                     }else {
                         precoProdutoDetails.setText("R$ " + thisProd.getPrecProduto().floatValue());

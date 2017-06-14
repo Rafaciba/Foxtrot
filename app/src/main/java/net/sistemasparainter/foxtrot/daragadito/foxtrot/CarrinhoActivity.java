@@ -2,7 +2,6 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +16,6 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.math.BigDecimal;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
@@ -65,7 +61,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             });
         }else{
 
-            btProsseguir.setText("Fianlizar compra");
+            btProsseguir.setText("Finalizar compra");
 
             // CRIA UM CARDVIEW PARA CADA ITEM DO CARRINHO
             for(ItemCarrinho ic : singletonCarrinho.getItensCarrinho()) {
@@ -133,8 +129,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         CardView cardView = (CardView) LayoutInflater.from(this).inflate(R.layout.carrinho_cardview, linearContainer, false);
 
         final ItemCarrinho itemCarrinho = p;
-
-        ImageView imgItemCarrinho = (ImageView) cardView.findViewById(R.id.imgItemCarrinho);
+        
         ImageView removeItemCarrinho = (ImageView) cardView.findViewById(R.id.removeItemCarrinho);
         TextView tvTituloItemCarrinho = (TextView) cardView.findViewById(R.id.tvTituloItemCarrinho);
         TextView tvValorItemCarrinho = (TextView) cardView.findViewById(R.id.tvValorItemCarrinho);
@@ -172,16 +167,6 @@ public class CarrinhoActivity extends AppCompatActivity {
                 linearContainer.removeViewAt(singletonCarrinho.getItensCarrinho().indexOf(p));
                 singletonCarrinho.RemoverItemCarrinho(p);
                 tvTotal.setText("Total: R$ "+singletonCarrinho.TotalCarrinho().floatValue());
-            }
-        });
-
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(CarrinhoActivity.this,ProdutoDetalheActivity.class);
-                i.putExtra("idProduto", ""+itemCarrinho.getProduto().getIdProduto());
-                startActivity(i);
             }
         });
 

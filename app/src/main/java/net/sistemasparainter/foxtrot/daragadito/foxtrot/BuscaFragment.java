@@ -2,20 +2,14 @@ package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -29,14 +23,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProdutosFragment extends Fragment {
-
+public class BuscaFragment extends Fragment {
 
     private ViewGroup linearContainer;
     private ArrayList<Produto> produtosArrayList = null;
-    private int idCategoria = 0;
+    private String busca;
 
-    public ProdutosFragment() {
+    ShowDialog showDialog = new ShowDialog(getActivity());
+
+    public BuscaFragment() {
         // Required empty public constructor
     }
 
@@ -44,19 +39,20 @@ public class ProdutosFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            idCategoria = getArguments().getInt("categoria", 0);
+            busca = getArguments().getString("busca", "");
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View fragmentView = inflater.inflate(R.layout.fragment_produtos, container, false);
+        // Inflate the layout for this fragment
+        View fragmentView = inflater.inflate(R.layout.fragment_busca, container, false);
 
         final LayoutInflater li = inflater;
 
-        linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearContainer);
+        linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearBuscaContainer);
 
         //imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
 
@@ -67,30 +63,29 @@ public class ProdutosFragment extends Fragment {
 
         Services service = retrofit.create(Services.class);
 
-        Call<ArrayList<Produto>> produtos;
-
-        if((idCategoria != 0)) {
-            produtos = service.getProdutoCategoria("" + idCategoria);
-        }else{
-            produtos = service.getProdutos();
-        }
+        Call<ArrayList<Produto>> produtos = service.getProdutoBusca(busca);
 
         try {
             produtos.enqueue(new Callback<ArrayList<Produto>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Produto>> call, Response<ArrayList<Produto>> response) {
-                    produtosArrayList = response.body();
+                    if(response.code() == 200) {
+                        produtosArrayList = response.body();
 
-                    if(produtosArrayList != null) {
-                        for (Produto p : produtosArrayList) {
-                            addCardView(p, li);
+                        if (produtosArrayList != null) {
+                            for (Produto p : produtosArrayList) {
+                                addCardView(p, li);
+                            }
                         }
+                    }else {
+                        showDialog.showMessage("Não foi possível carregar os produtos.","Ocorreu um erro");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<Produto>> call, Throwable t) {
-
+                    t.printStackTrace();
+                    showDialog.showMessage("Não foi possível carregar os produtos.","Ocorreu um erro");
                 }
             });
         }catch(Exception e){
@@ -100,6 +95,7 @@ public class ProdutosFragment extends Fragment {
         // Inflate the layout for this fragment
         return fragmentView;
     }
+
     private void addCardView(Produto produto, LayoutInflater inflater) {
 
         final Produto p = produto;
@@ -127,4 +123,5 @@ public class ProdutosFragment extends Fragment {
         linearContainer.addView(cardView);
 
     }
+
 }

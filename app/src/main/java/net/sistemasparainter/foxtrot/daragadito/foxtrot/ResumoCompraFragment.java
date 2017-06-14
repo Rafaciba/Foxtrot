@@ -15,6 +15,8 @@ public class ResumoCompraFragment extends Fragment {
 
     private ViewGroup linearContainer;
     private TextView tvTotalResumo;
+    private TextView tvEnderecoEntrega;
+    private TextView tvMetodoPagamento;
 
     public ResumoCompraFragment(){
 
@@ -31,14 +33,26 @@ public class ResumoCompraFragment extends Fragment {
         linearContainer = (ViewGroup) fragmentView.findViewById(R.id.linearResumoContainer);
 
         tvTotalResumo = (TextView) fragmentView.findViewById(R.id.tvTotalResumo);
+        tvEnderecoEntrega = (TextView) fragmentView.findViewById(R.id.tvEnderecoEntrega);
+        tvMetodoPagamento = (TextView) fragmentView.findViewById(R.id.tvMetodoPagamento);
 
         SingletonCarrinho sc = SingletonCarrinho.getInstance();
+        SingletonPedido sp = SingletonPedido.getInstance();
         ArrayList<ItemCarrinho> carrinho = sc.getItensCarrinho();
 
         for(ItemCarrinho ic : carrinho){
             addCardView(ic, li);
         }
 
+        tvEnderecoEntrega.setText("Endereço: " + sp.getEndereco().getLogradouroEndereco() + ", " + sp.getEndereco().getNumeroEndereco());
+        String pagto = "";
+        switch(sp.getIdTipoPagto()){
+            case 1: pagto = "Cartão"; break;
+            case 2: pagto = "Boleto"; break;
+            case 3: pagto = "pagSeguro"; break;
+            case 4: pagto = "Paypal"; break;
+        }
+        tvMetodoPagamento.setText("Método de pagamento: " + pagto);
         tvTotalResumo.setText("R$ "+sc.TotalCarrinho().floatValue());
 
         sc.LimparCarrinho();

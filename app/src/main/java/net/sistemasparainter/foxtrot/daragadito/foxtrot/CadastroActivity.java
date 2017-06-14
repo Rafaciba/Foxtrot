@@ -122,7 +122,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            showDialog.showMessage("Erro...","Erro");
+                            showDialog.showMessage("Ocorreu um erro inesperado! Por favor tente novamente.","Erro");
 
                         }
                     });

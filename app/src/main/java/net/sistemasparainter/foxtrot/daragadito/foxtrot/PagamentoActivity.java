@@ -1,5 +1,6 @@
 package net.sistemasparainter.foxtrot.daragadito.foxtrot;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -73,6 +74,12 @@ public class PagamentoActivity extends AppCompatActivity {
 
         Pedido p = new Pedido(0, sc.getClienteLogado().getIdCliente(), 1, currentDate, sp.getIdTipoPagto(), sp.getEndereco().getIdEndereco(), 2);
 
+        final ProgressDialog progress = new ProgressDialog(PagamentoActivity.this);
+        progress.setTitle("Pedido");
+        progress.setMessage("Estamos processando seu pedido. Aguarde um momento.");
+        progress.setCancelable(false);
+        progress.show();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://foxtrotws.azurewebsites.net/g1/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -86,16 +93,20 @@ public class PagamentoActivity extends AppCompatActivity {
             pedido.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
+                    progress.dismiss();
                     if(response.isSuccessful() && response.code() == 201){
                         Intent i = new Intent(PagamentoActivity.this, MainActivity.class);
                         i.putExtra("fragment", "resumo");
                         showDialog.showMessageAndRedirect("Seu pedido foi enviado para a loja!","Pedido", i);
+                    }else{
+                        showDialog.showMessage("Tivemos um problema ao processar seu pedido. Tente novamente mais tarde.","Ocorreu um erro");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     t.printStackTrace();
+                    progress.dismiss();
                 }
             });
         }catch(Exception e){

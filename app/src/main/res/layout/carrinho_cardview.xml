@@ -15,22 +15,12 @@
         android:layout_height="121dp">
 
 
-
-        <ImageView
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_menu_gallery"
-            android:id="@+id/imgProdutoCarrinho"
-            android:layout_weight="0.33"
-            android:layout_width="77dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_alignParentStart="true" />
-
         <LinearLayout
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_width="180dp">
+            android:layout_width="180dp"
+            android:layout_weight="0.35">
             <TextView
                 android:text="Nome do Produto"
                 android:layout_width="wrap_content"
@@ -40,8 +30,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="1dp"
                 android:id="@+id/tvTituloItemCarrinho"
-                android:layout_alignTop="@+id/imgItemCarrinho"
-                android:layout_toEndOf="@+id/imgItemCarrinho"
+                android:layout_alignTop="@+id/imgListaProdutos"
+                android:layout_toEndOf="@+id/imgListaProdutos"
                 android:layout_gravity="left"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:maxWidth="200dp" />
@@ -50,7 +40,7 @@
                 android:id="@+id/tvValorItemCarrinho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imgItemCarrinho"
+                android:layout_alignBottom="@+id/imgListaProdutos"
                 android:layout_alignStart="@+id/tvTituloItemCarrinho"
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
@@ -97,7 +87,7 @@
                     android:id="@+id/incItemCarrinho"
                     android:layout_width="26dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.38"
+                    android:layout_weight="0.17"
                     android:text="+"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 

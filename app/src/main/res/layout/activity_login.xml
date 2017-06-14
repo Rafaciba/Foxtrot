@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/cbManterLogado"
         android:checked="true"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="57dp"
         android:layout_above="@+id/btnLogin"
         android:layout_centerHorizontal="true" />
 
@@ -66,8 +66,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnLogin"
+        android:layout_marginBottom="46dp"
+        android:layout_above="@+id/btnCadastro"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:layout_marginBottom="23dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="31dp" />
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ainda não é cadastrado?"
+        android:layout_above="@+id/btnCadastro"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -152,35 +152,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(NetworkUtil.getConnectivityStatus(MainActivity.this) == 0){
+        if(NetworkUtil.getConnectivityStatus(MainActivity.this) == 0) {
             ShowDialog sd = new ShowDialog(MainActivity.this);
             sd.showConnectionMessage();
-        }
+        }else{
+            Fragment fragment;
+            Intent i = getIntent();
+            if ((i != null) && ((i.getStringExtra("fragment") != null) || (i.getStringExtra("busca") != null))) {
+                if (i.getStringExtra("fragment") != null) {
+                    String pagina = i.getStringExtra("fragment");
+                    if (pagina.equals("resumo")) {
+                        fragment = new ResumoCompraFragment();
+                    } else {
+                        fragment = new CategoriasFragment();
+                    }
+                } else if (i.getStringExtra("busca") != null) {
+                    Bundle bundleBusca = new Bundle();
+                    bundleBusca.putString("busca", i.getStringExtra("busca"));
 
-        Fragment fragment;
-        Intent i = getIntent();
-        if((i != null) && ((i.getStringExtra("fragment") != null) || (i.getStringExtra("busca") != null))){
-            if(i.getStringExtra("fragment") != null) {
-                String pagina = i.getStringExtra("fragment");
-                if (pagina.equals("resumo")) {
-                    fragment = new ResumoCompraFragment();
+                    fragment = new BuscaFragment();
+                    fragment.setArguments(bundleBusca);
                 } else {
                     fragment = new CategoriasFragment();
                 }
-            }else if (i.getStringExtra("busca") != null){
-                Bundle bundleBusca = new Bundle();
-                bundleBusca.putString("busca", i.getStringExtra("busca"));
-
-                fragment = new BuscaFragment();
-                fragment.setArguments(bundleBusca);
-            }else{
+            } else {
                 fragment = new CategoriasFragment();
             }
-        }else{
-            fragment = new CategoriasFragment();
-        }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, fragment).commit();
+        }
     }
 
     @Override
